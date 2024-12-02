@@ -19,9 +19,8 @@ namespace ShopApp.Pages
             _productService = productService;
             Products = new List<Product>(); // Инициализация списка продуктов
 
-            // Привязываем данные клиента
-            LabelClientName.Text = $"Добро пожаловать, {_client.FullName}!";
-            LabelClientEmail.Text = _client.Email;
+            // Привязываем только имя клиента
+            LabelClientName.Text = _client.FullName;
         }
 
         protected override async void OnAppearing()
@@ -47,6 +46,5 @@ namespace ShopApp.Pages
                 await DisplayAlert("Ошибка", "Не удалось загрузить продукты", "OK");
             }
         }
-
     }
 }
