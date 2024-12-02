@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ShopApp.Pages.RegisterPage"
+             BackgroundColor="#334D34">
+
+    <StackLayout Padding="30">
+        <!-- Заголовок -->
+        <Label Text="Зарегистрируйтесь в ShopApp" 
+               FontSize="32" 
+               HorizontalOptions="Center" 
+               TextColor="#EAE4C2" />
+
+        <!-- Поле для логина -->
+        <Entry x:Name="RegisterLoginEntry" 
+               Placeholder="Логин" 
+               BackgroundColor="#719442" 
+               TextColor="#EAE4C2" 
+               Margin="0,10" />
+
+        <!-- Поле для пароля -->
+        <Entry x:Name="RegisterPasswordEntry" 
+               Placeholder="Пароль" 
+               IsPassword="True" 
+               BackgroundColor="#719442" 
+               TextColor="#EAE4C2" 
+               Margin="0,10" />
+
+        <!-- Поле для подтверждения пароля -->
+        <Entry x:Name="RegisterPasswordConfirmationEntry" 
+               Placeholder="Подтверждение пароля" 
+               IsPassword="True" 
+               BackgroundColor="#719442" 
+               TextColor="#EAE4C2" 
+               Margin="0,10" />
+
+        <!-- Поле для полного имени -->
+        <Entry x:Name="RegisterFullNameEntry" 
+               Placeholder="Полное имя" 
+               BackgroundColor="#719442" 
+               TextColor="#EAE4C2" 
+               Margin="0,10" />
+
+        <!-- Поле для email -->
+        <Entry x:Name="RegisterEmailEntry" 
+               Placeholder="Email" 
+               BackgroundColor="#719442" 
+               TextColor="#EAE4C2" 
+               Margin="0,10" />
+
+        <!-- Поле для даты рождения -->
+        <DatePicker x:Name="RegisterBirthEntry" 
+                    BackgroundColor="#719442" 
+                    TextColor="#EAE4C2" 
+                    Margin="0,10" />
+
+        <!-- Поле для телефона -->
+        <Entry x:Name="RegisterTelephoneEntry" 
+               Placeholder="Телефон" 
+               BackgroundColor="#719442" 
+               TextColor="#EAE4C2" 
+               Margin="0,10" />
+
+        <!-- Кнопка для регистрации -->
+        <Button Text="Зарегистрироваться" 
+                BackgroundColor="#719442" 
+                TextColor="#EAE4C2" 
+                Clicked="OnRegisterClicked" 
+                Margin="0,10" />
+
+        <!-- Кнопка для перехода на страницу логина -->
+        <Button Text="Уже есть аккаунт? Войдите" 
+                BackgroundColor="#719442" 
+                TextColor="#EAE4C2" 
+                Clicked="OnLoginPageClicked" 
+                Margin="0,10" />
+    </StackLayout>
+</ContentPage>

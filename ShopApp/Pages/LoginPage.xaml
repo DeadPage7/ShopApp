@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ShopApp.Pages.LoginPage"
+             BackgroundColor="#334D34">
+
+    <StackLayout Padding="30">
+        <!-- Приветственное сообщение -->
+        <Label Text="Войдите в ShopApp" 
+               FontSize="32" 
+               HorizontalOptions="Center" 
+               TextColor="#EAE4C2" />
+
+        <!-- Поле для логина -->
+        <Entry x:Name="LoginEntry" 
+               Placeholder="Логин" 
+               BackgroundColor="#719442" 
+               TextColor="#EAE4C2" 
+               Margin="0,10" />
+
+        <!-- Поле для пароля -->
+        <Entry x:Name="PasswordEntry" 
+               Placeholder="Пароль" 
+               IsPassword="True" 
+               BackgroundColor="#719442" 
+               TextColor="#EAE4C2" 
+               Margin="0,10" />
+
+        <!-- Кнопка для входа -->
+        <Button Text="Войти" 
+                BackgroundColor="#719442" 
+                TextColor="#EAE4C2" 
+                Clicked="OnLoginClicked" 
+                Margin="0,10" />
+
+        <!-- Кнопка для перехода на страницу регистрации -->
+        <Button Text="Нет аккаунта? Зарегистрироваться" 
+                BackgroundColor="#719442" 
+                TextColor="#EAE4C2" 
+                Clicked="OnRegisterPageClicked" 
+                Margin="0,10" />
+    </StackLayout>
+</ContentPage>

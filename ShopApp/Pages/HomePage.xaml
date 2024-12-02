@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ShopApp.Pages.HomePage"
+             BackgroundColor="#334D34">
+
+    <StackLayout Padding="30">
+        <!-- Приветственное сообщение -->
+        <Label Text="Добро пожаловать в ShopApp!" 
+               FontSize="32" 
+               HorizontalOptions="Center" 
+               TextColor="#EAE4C2" />
+
+        <!-- Данные клиента -->
+        <Label x:Name="LabelClientName" 
+               FontSize="20" 
+               TextColor="#EAE4C2" 
+               Margin="0,10" />
+        <Label x:Name="LabelClientEmail" 
+               FontSize="20" 
+               TextColor="#EAE4C2" 
+               Margin="0,10" />
+
+        <!-- Carousel для отображения продуктов -->
+        <CarouselView x:Name="ProductCarouselView" 
+                      ItemsSource="{Binding Products}" 
+                      Loop="True" 
+                      HeightRequest="200">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" BackgroundColor="White" CornerRadius="10" WidthRequest="300">
+                        <StackLayout>
+                            <Image Source="{Binding Photo}" HeightRequest="100"/>
+                            <Label Text="{Binding Name}" FontSize="18" TextColor="#334D34" />
+                            <Label Text="{Binding Price, StringFormat='Цена: {0:C}'}" FontSize="14" TextColor="#334D34" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+    </StackLayout>
+</ContentPage>
