@@ -59,6 +59,7 @@
 	  <None Remove="Resources\Images\cart_icon.png" />
 	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\logobig.png" />
 	  <None Remove="Resources\Images\product.png" />
 	  <None Remove="Resources\Images\profile.png" />
 	</ItemGroup>

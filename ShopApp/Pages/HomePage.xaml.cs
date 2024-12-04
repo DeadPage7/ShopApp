@@ -13,7 +13,6 @@ namespace ShopApp.Pages
         public List<Product> Products { get; set; } // Добавляем свойство для привязки продуктов
         public List<Category> Categories { get; set; } // Добавляем свойство для привязки категорий
 
-
         public HomePage(Client client, ProductService productService)
         {
             InitializeComponent();
@@ -30,6 +29,9 @@ namespace ShopApp.Pages
         {
             base.OnAppearing();
 
+            // Плавное появление элементов
+            var animation = new Animation(v => CategoryCollectionView.Opacity = v, 0, 1);
+            animation.Commit(this, "FadeInAnimation", length: 1000, easing: Easing.Linear);
 
             // Загрузка категорий
             var categories = await _productService.GetCategoriesAsync();
@@ -40,8 +42,12 @@ namespace ShopApp.Pages
             }
             else
             {
-                await DisplayAlert("Ошибка", "Не удалось загрузить категории", "OK");   
+                await DisplayAlert("Ошибка", "Не удалось загрузить категории", "OK");
             }
+
+            // Анимация для продуктов (например, увеличение масштаба)
+            var productAnimation = new Animation(v => ProductCarouselView.Scale = v, 0, 1);
+            productAnimation.Commit(this, "ScaleAnimation", length: 1000, easing: Easing.Linear);
 
             // Получаем список продуктов
             var products = await _productService.GetProductsAsync();
@@ -62,6 +68,5 @@ namespace ShopApp.Pages
                 await DisplayAlert("Ошибка", "Не удалось загрузить продукты", "OK");
             }
         }
-
     }
 }
