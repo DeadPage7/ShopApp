@@ -11,6 +11,8 @@ namespace ShopApp.Pages
         private readonly Client _client;
 
         public List<Product> Products { get; set; } // Добавляем свойство для привязки продуктов
+        public List<Category> Categories { get; set; } // Добавляем свойство для привязки категорий
+
 
         public HomePage(Client client, ProductService productService)
         {
@@ -18,6 +20,7 @@ namespace ShopApp.Pages
             _client = client;
             _productService = productService;
             Products = new List<Product>(); // Инициализация списка продуктов
+            Categories = new List<Category>(); // Инициализация списка категорий
 
             // Привязываем только имя клиента
             LabelClientName.Text = _client.FullName;
@@ -26,6 +29,19 @@ namespace ShopApp.Pages
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+
+
+            // Загрузка категорий
+            var categories = await _productService.GetCategoriesAsync();
+            if (categories != null)
+            {
+                Categories = categories;
+                CategoryCollectionView.ItemsSource = Categories;
+            }
+            else
+            {
+                await DisplayAlert("Ошибка", "Не удалось загрузить категории", "OK");   
+            }
 
             // Получаем список продуктов
             var products = await _productService.GetProductsAsync();
@@ -46,5 +62,6 @@ namespace ShopApp.Pages
                 await DisplayAlert("Ошибка", "Не удалось загрузить продукты", "OK");
             }
         }
+
     }
 }

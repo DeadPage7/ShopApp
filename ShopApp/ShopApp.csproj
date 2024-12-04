@@ -57,7 +57,10 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\cart_icon.png" />
+	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\product.png" />
+	  <None Remove="Resources\Images\profile.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -72,6 +75,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ProductsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\ProfilePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\RegisterPage.xaml">

@@ -9,7 +9,8 @@ namespace ShopApp.Services
     public class ProductService
     {
         private readonly HttpClient _httpClient;
-        private const string ApiUrl = "http://course-project-4/api/product";
+        private const string ApiUrl = "http://course-project-4/api/product"; // URL для продуктов
+        private const string CategoryApiUrl = "http://course-project-4/api/categories"; // URL для категорий
 
         public ProductService()
         {
@@ -37,6 +38,20 @@ namespace ShopApp.Services
                 }
 
                 return products;
+            }
+
+            return null;
+        }
+
+        // Метод для получения списка категорий
+        public async Task<List<Category>> GetCategoriesAsync()
+        {
+            var response = await _httpClient.GetAsync(CategoryApiUrl);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseData = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<List<Category>>(responseData);
             }
 
             return null;

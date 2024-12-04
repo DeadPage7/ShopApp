@@ -24,4 +24,12 @@ namespace ShopApp.Models
         [JsonProperty("description")]
         public string Description { get; set; }
     }
+    public class Category
+    {
+        [JsonProperty("id")]
+        public int Id { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+    }
 }

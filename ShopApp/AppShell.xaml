@@ -6,7 +6,22 @@
     xmlns:pages="clr-namespace:ShopApp.Pages"
     Shell.FlyoutBehavior="Disabled"
     Title="ShopApp">
+    <TabBar>
+        <!-- Главная страница -->
+        <ShellContent Title="Home" 
+                      Icon="home.png" 
+                      ContentTemplate="{DataTemplate pages:HomePage}" />
 
+        <!-- Профиль -->
+        <ShellContent Title="Profile" 
+                      Icon="profile.png" 
+                      ContentTemplate="{DataTemplate pages:ProfilePage}" />
+
+        <!-- Продукты -->
+        <ShellContent Title="Products" 
+                      Icon="product.png" 
+                      ContentTemplate="{DataTemplate pages:ProductsPage}" />
+    </TabBar>
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate pages:LoginPage}"

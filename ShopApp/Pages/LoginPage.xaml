@@ -13,18 +13,22 @@
 
         <!-- Поле для логина -->
         <Entry x:Name="LoginEntry" 
-               Placeholder="Логин" 
-               BackgroundColor="#719442" 
-               TextColor="#EAE4C2" 
-               Margin="0,10" />
+       Placeholder="Логин" 
+       BackgroundColor="#719442" 
+       TextColor="#EAE4C2" 
+       Margin="0,10" 
+       Text="ivan_ivanov" />
+
 
         <!-- Поле для пароля -->
         <Entry x:Name="PasswordEntry" 
-               Placeholder="Пароль" 
-               IsPassword="True" 
-               BackgroundColor="#719442" 
-               TextColor="#EAE4C2" 
-               Margin="0,10" />
+       Placeholder="Пароль" 
+       IsPassword="True" 
+       BackgroundColor="#719442" 
+       TextColor="#EAE4C2" 
+       Margin="0,10" 
+       Text="password123" />
+
 
         <!-- Кнопка для входа -->
         <Button Text="Войти" 
