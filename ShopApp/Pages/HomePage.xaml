@@ -4,82 +4,140 @@
              x:Class="ShopApp.Pages.HomePage"
              BackgroundColor="#334D34">
 
-    <StackLayout Spacing="20">
-        <!-- Верхняя панель -->
-        <Grid ColumnDefinitions="Auto,*,Auto" Padding="10">
-            <!-- Логотип -->
-            <Image Source="logo.png" HeightRequest="40" WidthRequest="40" Grid.Column="0" VerticalOptions="Center" />
+    <!-- Основной контейнер -->
+    <Grid>
 
-            <!-- Имя пользователя -->
-            <Label x:Name="LabelClientName" 
-                   FontSize="18" 
-                   TextColor="#EAE4C2" 
-                   HorizontalOptions="Center" 
-                   VerticalOptions="Center" 
-                   Grid.Column="1" />
+        <!-- Основной контент страницы -->
+        <StackLayout Spacing="20" VerticalOptions="FillAndExpand">
+            <!-- Верхняя панель -->
+            <Grid ColumnDefinitions="Auto,*,Auto" Padding="10">
+                <!-- Логотип -->
+                <Image Source="logo.png" HeightRequest="40" WidthRequest="40" Grid.Column="0" VerticalOptions="Center" />
 
-            <!-- Иконка корзины -->
-            <ImageButton Source="cart_icon.png" 
-                         HeightRequest="30" 
-                         WidthRequest="30" 
-                         Grid.Column="2" 
-                         VerticalOptions="Center"
-                         BackgroundColor="Transparent"/>
-        </Grid>
-
-        <BoxView HeightRequest="5" BackgroundColor="#719442"/>
-
-        <!-- Список категорий -->
-        <CollectionView x:Name="CategoryCollectionView" 
-                        ItemsSource="{Binding Categories}" 
-                        SelectionMode="Single" 
-                        HorizontalScrollBarVisibility="Never"
-                        HorizontalOptions="Center">
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="5" BackgroundColor="#719442" CornerRadius="5" Margin="3" HasShadow="True">
-                        <Label Text="{Binding Name}" 
-                               FontSize="14" 
-                               TextColor="#EAE4C2" 
-                               HorizontalTextAlignment="Center" />
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-
-        <BoxView HeightRequest="5" BackgroundColor="#719442"/>
-
-        <!-- Карусель продуктов -->
-        <CarouselView x:Name="ProductCarouselView" 
-                      ItemsSource="{Binding Products}" 
-                      Loop="True" 
-                      HorizontalOptions="Center" 
-                      IndicatorView="IndicatorView">
-            <CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <Frame Padding="10" BackgroundColor="#719442" CornerRadius="10" WidthRequest="300" HeightRequest="400" HasShadow="True">
-                        <Frame BackgroundColor="#334D34" CornerRadius="10" Padding="10" HasShadow="True">
-                            <StackLayout Spacing="5">
-                                <Image Source="{Binding Photo}" HeightRequest="250" WidthRequest="300"/>
-                                <Label Text="{Binding Name}" FontSize="18" TextColor="#EAE4C2" />
-                                <Label Text="{Binding Price, StringFormat='Цена: {0:C}'}" FontSize="14" TextColor="#EAE4C2" />
-                                <Label Text="{Binding Description}" FontSize="12" TextColor="#EAE4C2" LineBreakMode="WordWrap" />
-                            </StackLayout>
-                        </Frame>
-                    </Frame>
-                </DataTemplate>
-            </CarouselView.ItemTemplate>
-        </CarouselView>
-
-        <!-- Индикаторы -->
-        <IndicatorView x:Name="IndicatorView" 
-                       IndicatorColor="#EAE4C2" 
-                       SelectedIndicatorColor="#719442"
+                <!-- Имя пользователя -->
+                <Label x:Name="LabelClientName" 
+                       FontSize="18" 
+                       TextColor="#EAE4C2" 
                        HorizontalOptions="Center" 
-                       VerticalOptions="End" 
-                       IndicatorSize="10" />
-    </StackLayout>
+                       VerticalOptions="Center" 
+                       Grid.Column="1" />
+
+                <!-- Иконка корзины -->
+                <ImageButton Source="cart_icon.png" 
+                             HeightRequest="30" 
+                             WidthRequest="30" 
+                             Grid.Column="2" 
+                             VerticalOptions="Center"
+                             BackgroundColor="Transparent"/>
+            </Grid>
+
+            <BoxView HeightRequest="5" BackgroundColor="#719442"/>
+
+            <!-- Список категорий -->
+            <CollectionView x:Name="CategoryCollectionView" 
+                            ItemsSource="{Binding Categories}" 
+                            SelectionMode="Single" 
+                            HorizontalScrollBarVisibility="Never"
+                            HorizontalOptions="Center">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="5" BackgroundColor="#719442" CornerRadius="5" Margin="3" HasShadow="True">
+                            <Label Text="{Binding Name}" 
+                                   FontSize="14" 
+                                   TextColor="#EAE4C2" 
+                                   HorizontalTextAlignment="Center" />
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <BoxView HeightRequest="5" BackgroundColor="#719442"/>
+
+            <!-- Карусель продуктов -->
+            <CarouselView x:Name="ProductCarouselView" 
+                          ItemsSource="{Binding Products}" 
+                          Loop="True" 
+                          HorizontalOptions="Center" 
+                          IndicatorView="IndicatorView">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="10" BackgroundColor="#719442" CornerRadius="10" WidthRequest="300" HeightRequest="400" HasShadow="True">
+                            <Frame BackgroundColor="#334D34" CornerRadius="10" Padding="10" HasShadow="True">
+                                <StackLayout Spacing="5">
+                                    <Image Source="{Binding Photo}" HeightRequest="250" WidthRequest="300"/>
+                                    <Label Text="{Binding Name}" FontSize="18" TextColor="#EAE4C2" />
+                                    <Label Text="{Binding Price, StringFormat='Цена: {0:C}'}" FontSize="14" TextColor="#EAE4C2" />
+                                    <Label Text="{Binding Description}" FontSize="12" TextColor="#EAE4C2" LineBreakMode="WordWrap" />
+                                </StackLayout>
+                            </Frame>
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+            <!-- Индикаторы -->
+            <IndicatorView x:Name="IndicatorView" 
+                           IndicatorColor="#EAE4C2" 
+                           SelectedIndicatorColor="#719442"
+                           HorizontalOptions="Center" 
+                           VerticalOptions="End" 
+                           IndicatorSize="10" />
+        </StackLayout>
+
+        <!-- Панель навигации внизу -->
+        <StackLayout BackgroundColor="#719442" VerticalOptions="EndAndExpand">
+            <!-- Панель навигации по ширине -->
+            <Grid HorizontalOptions="FillAndExpand">
+                <!-- Определяем 3 равные колонки -->
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Кнопка Каталог -->
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="0">
+                    <ImageButton Source="product.png" 
+                         HeightRequest="40" 
+                         WidthRequest="40" 
+                         BackgroundColor="Transparent"
+                         Clicked="OnCatalogButtonClicked" />
+                    <Label Text="Каталог" 
+                   FontSize="12" 
+                   TextColor="#EAE4C2" 
+                   HorizontalOptions="Center" />
+                </StackLayout>
+
+                <!-- Кнопка Профиль -->
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="1">
+                    <ImageButton Source="profile.png" 
+                         HeightRequest="40" 
+                         WidthRequest="40" 
+                         BackgroundColor="Transparent"
+                         Clicked="OnProfileButtonClicked" />
+                    <Label Text="Профиль" 
+                   FontSize="12" 
+                   TextColor="#EAE4C2" 
+                   HorizontalOptions="Center" />
+                </StackLayout>
+
+                <!-- Кнопка Главная -->
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="2">
+                    <ImageButton Source="home.png" 
+                         HeightRequest="40" 
+                         WidthRequest="40" 
+                         BackgroundColor="Transparent"
+                         Clicked="OnHomeButtonClicked" />
+                    <Label Text="Главная" 
+                   FontSize="12" 
+                   TextColor="#EAE4C2" 
+                   HorizontalOptions="Center" />
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </Grid>
+
 </ContentPage>

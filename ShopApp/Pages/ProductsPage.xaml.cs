@@ -10,6 +10,7 @@ namespace ShopApp.Pages
         public List<Product> Products { get; set; }
         public List<Category> Categories { get; set; }
 
+        //  онструктор с параметром selectedCategoryId
         public ProductsPage(int selectedCategoryId)
         {
             InitializeComponent();
@@ -19,7 +20,7 @@ namespace ShopApp.Pages
 
             // «агружаем категории и продукты дл€ выбранной категории
             LoadCategories();
-            LoadProducts(selectedCategoryId);
+            LoadProducts(selectedCategoryId); // «агружаем продукты дл€ выбранной категории или все продукты (если selectedCategoryId == 0)
         }
 
         // ћетод дл€ загрузки категорий
@@ -40,7 +41,17 @@ namespace ShopApp.Pages
         // ћетод дл€ загрузки продуктов по выбранной категории
         private async void LoadProducts(int categoryId)
         {
-            var products = await _productService.GetProductsByCategoryAsync(categoryId);
+            List<Product> products = null;
+
+            // ≈сли categoryId == 0, то загружаем все продукты
+            if (categoryId == 0)
+            {
+                products = await _productService.GetProductsAsync(); // ѕолучаем все продукты
+            }
+            else
+            {
+                products = await _productService.GetProductsByCategoryAsync(categoryId); // ѕолучаем продукты дл€ выбранной категории
+            }
 
             if (products != null)
             {

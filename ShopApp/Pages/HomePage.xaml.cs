@@ -81,5 +81,23 @@ namespace ShopApp.Pages
                 await DisplayAlert("Ошибка", "Не удалось загрузить продукты", "OK");
             }
         }
+        // Обработчик кнопки Каталог
+        private async void OnCatalogButtonClicked(object sender, EventArgs e)
+        {
+            // Переход на страницу каталога (ProductsPage) с дефолтным selectedCategoryId (например, 0)
+            await Navigation.PushAsync(new ProductsPage(0));
+        }
+
+        // Обработчик кнопки Профиль
+        private async void OnProfileButtonClicked(object sender, EventArgs e)
+        {
+            // Переход на страницу профиля (ProfilePage)
+            await Navigation.PushAsync(new ProfilePage());
+        }
+        private async void OnHomeButtonClicked(object sender, EventArgs e)
+        {
+            
+        }
+
     }
 }
