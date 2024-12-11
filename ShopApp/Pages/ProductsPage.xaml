@@ -1,0 +1,78 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="ShopApp.Pages.ProductsPage"
+             BackgroundColor="#334D34">
+
+    <StackLayout Spacing="20">
+        <!-- Верхняя панель -->
+        <Grid ColumnDefinitions="Auto,*,Auto" Padding="10">
+            <!-- Логотип -->
+            <Image Source="logo.png" HeightRequest="40" WidthRequest="40" Grid.Column="0" VerticalOptions="Center" />
+
+            <!-- Имя пользователя -->
+            <Label x:Name="LabelClientName" 
+                   FontSize="18" 
+                   TextColor="#EAE4C2" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center" 
+                   Grid.Column="1" />
+
+            <!-- Иконка корзины -->
+            <ImageButton Source="cart_icon.png" 
+                         HeightRequest="30" 
+                         WidthRequest="30" 
+                         Grid.Column="2" 
+                         VerticalOptions="Center"
+                         BackgroundColor="Transparent"/>
+        </Grid>
+
+        <BoxView HeightRequest="5" BackgroundColor="#719442"/>
+
+        <!-- Список категорий -->
+        <CollectionView x:Name="CategoryCollectionView" 
+                ItemsSource="{Binding Categories}" 
+                SelectionMode="Single" 
+                HorizontalScrollBarVisibility="Never"
+                HorizontalOptions="Center"
+                SelectionChanged="OnCategorySelected">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Horizontal" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="5" BackgroundColor="#719442" CornerRadius="5" Margin="3" HasShadow="True">
+                        <Label Text="{Binding Name}" 
+                       FontSize="14" 
+                       TextColor="#EAE4C2" 
+                       HorizontalTextAlignment="Center" />
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <BoxView HeightRequest="5" BackgroundColor="#719442"/>
+
+        <!-- Список продуктов -->
+        <CollectionView x:Name="ProductsCollectionView" 
+                        ItemsSource="{Binding Products}" 
+                        SelectionMode="Single" 
+                        HorizontalScrollBarVisibility="Never">
+            <CollectionView.ItemsLayout>
+                <!-- Используем GridItemsLayout для отображения товаров в 2 колонки -->
+                <GridItemsLayout Orientation="Vertical" Span="2" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" BackgroundColor="#719442" CornerRadius="5" Margin="5" HasShadow="True">
+                        <StackLayout Spacing="5" HorizontalOptions="Center">
+                            <Image Source="{Binding Photo}" HeightRequest="150" WidthRequest="150" />
+                            <Label Text="{Binding Name}" FontSize="14" TextColor="#EAE4C2" HorizontalOptions="Center" />
+                            <Label Text="{Binding Price, StringFormat='Цена: {0:C}'}" FontSize="12" TextColor="#EAE4C2" HorizontalOptions="Center" />
+                            <Label Text="{Binding Description}" FontSize="10" TextColor="#EAE4C2" LineBreakMode="WordWrap" HorizontalOptions="Center" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>
