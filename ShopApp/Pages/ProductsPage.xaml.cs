@@ -10,7 +10,6 @@ namespace ShopApp.Pages
         public List<Product> Products { get; set; }
         public List<Category> Categories { get; set; }
 
-        // Конструктор с параметром selectedCategoryId
         public ProductsPage(int selectedCategoryId)
         {
             InitializeComponent();
@@ -29,7 +28,11 @@ namespace ShopApp.Pages
             var categories = await _productService.GetCategoriesAsync();
             if (categories != null)
             {
-                Categories = categories;
+                // Добавляем "Все товары" в начало списка категорий
+                Categories.Clear();
+                Categories.Add(new Category { Id = 0, Name = "Все товары" });
+                Categories.AddRange(categories);
+
                 CategoryCollectionView.ItemsSource = Categories; // Привязываем категории к CollectionView
             }
             else
@@ -38,29 +41,27 @@ namespace ShopApp.Pages
             }
         }
 
-        // Метод для загрузки продуктов по выбранной категории
+        // Метод для загрузки продуктов
         private async void LoadProducts(int categoryId)
         {
-            List<Product> products = null;
+            List<Product> products;
 
-            // Если categoryId == 0, то загружаем все продукты
             if (categoryId == 0)
             {
-                products = await _productService.GetProductsAsync(); // Получаем все продукты
+                // Если выбран "Все товары", загружаем все продукты
+                products = await _productService.GetProductsAsync();
             }
             else
             {
-                products = await _productService.GetProductsByCategoryAsync(categoryId); // Получаем продукты для выбранной категории
+                // Загружаем продукты для выбранной категории
+                products = await _productService.GetProductsByCategoryAsync(categoryId);
             }
 
             if (products != null)
             {
                 // Обновляем список продуктов
                 Products.Clear();
-                foreach (var product in products)
-                {
-                    Products.Add(product);
-                }
+                Products.AddRange(products);
 
                 // Перезаписываем привязку для обновления данных в UI
                 ProductsCollectionView.ItemsSource = null; // Очищаем текущую привязку
@@ -68,14 +69,13 @@ namespace ShopApp.Pages
             }
             else
             {
-                await DisplayAlert("Ошибка", "Не удалось загрузить продукты для этой категории", "OK");
+                await DisplayAlert("Ошибка", "Не удалось загрузить продукты", "OK");
             }
         }
 
         // Обработчик для изменения выбранной категории
         private void OnCategorySelected(object sender, SelectionChangedEventArgs e)
         {
-            // Проверяем, есть ли выбранный элемент
             if (e.CurrentSelection.Count > 0)
             {
                 // Получаем выбранную категорию

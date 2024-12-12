@@ -26,8 +26,8 @@
                          BackgroundColor="Transparent"/>
         </Grid>
 
-        <!-- Линия под верхней панелью с отступом -->
-        <BoxView HeightRequest="5" BackgroundColor="#719442" Grid.Row="1"  Margin="0,20" />
+        <!-- Линия под верхней панелью -->
+        <BoxView HeightRequest="5" BackgroundColor="#719442" Grid.Row="1" Margin="0,20" />
 
         <!-- Список категорий -->
         <CollectionView x:Name="CategoryCollectionView" 
@@ -36,7 +36,8 @@
                         HorizontalScrollBarVisibility="Never"
                         HorizontalOptions="Center"
                         SelectionChanged="OnCategorySelected"
-                        Grid.Row="2">
+                        Grid.Row="2"
+                        Margin="10">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Horizontal" />
             </CollectionView.ItemsLayout>
@@ -52,8 +53,8 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- Линия под категориями с отступом -->
-        <BoxView HeightRequest="5" BackgroundColor="#719442" Grid.Row="3"  Margin="0,20" />
+        <!-- Линия под категориями -->
+        <BoxView HeightRequest="5" BackgroundColor="#719442" Grid.Row="3" Margin="0,20" />
 
         <!-- Список продуктов -->
         <CollectionView x:Name="ProductsCollectionView" 
