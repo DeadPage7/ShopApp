@@ -99,5 +99,10 @@ namespace ShopApp.Pages
             
         }
 
+        private async void OnDetailsProductButtonClicked(object sender, EventArgs e)
+        {
+            // Переход на страницу "Подробности" (DetailsProductPage)
+            await Navigation.PushAsync(new DetailsProductPage());
+        }
     }
 }
