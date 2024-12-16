@@ -72,9 +72,9 @@
                         <Frame BackgroundColor="#334D34" CornerRadius="10" Padding="10" HasShadow="True">
                             <StackLayout Spacing="5" HorizontalOptions="CenterAndExpand">
                                 <Image Source="{Binding Photo}" HeightRequest="150" WidthRequest="150" HorizontalOptions="Center" />
-                                <Label Text="{Binding Name}" FontSize="14" TextColor="#EAE4C2" HorizontalOptions="Center" />
-                                <Label Text="{Binding Price, StringFormat='Цена: {0:C}'}" FontSize="12" TextColor="#EAE4C2" HorizontalOptions="Center" />
-                                <Label Text="{Binding Description}" FontSize="10" TextColor="#EAE4C2" LineBreakMode="WordWrap" HorizontalOptions="Center" />
+                                <Label Text="{Binding Name}" TextColor="#EAE4C2" HorizontalOptions="Center" FontSize="20"/>
+                                <Label Text="{Binding Price, StringFormat='Цена: {0:C}'}" FontSize="18" TextColor="#EAE4C2" HorizontalOptions="Center" />
+                                <Button Text="Подробнее" CornerRadius="10" BorderWidth="3" BorderColor="#25463D"  WidthRequest="200" FontAttributes="Bold" Background="#719442" FontSize="20" Clicked="OnDetailsProductButtonClicked"></Button>
                             </StackLayout>
                         </Frame>
                     </Frame>

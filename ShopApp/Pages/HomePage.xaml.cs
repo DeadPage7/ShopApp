@@ -8,7 +8,7 @@ namespace ShopApp.Pages
     public partial class HomePage : ContentPage
     {
         private readonly ProductService _productService;
-        private readonly Client _client;
+        private readonly Client _client; // Экземпляр клиента
 
         public List<Product> Products { get; set; } // Добавляем свойство для привязки продуктов
         public List<Category> Categories { get; set; } // Добавляем свойство для привязки категорий
@@ -16,11 +16,12 @@ namespace ShopApp.Pages
         public HomePage(Client client, ProductService productService)
         {
             InitializeComponent();
-            _client = client;
+            _client = client; // Сохраняем переданного клиента
             _productService = productService;
             Products = new List<Product>();
             Categories = new List<Category>();
 
+            // Устанавливаем имя пользователя в Label
             LabelClientName.Text = _client.FullName;
 
             // Добавляем обработчик для выбора категории
@@ -32,7 +33,7 @@ namespace ShopApp.Pages
                     if (selectedCategory != null)
                     {
                         // Навигация на страницу с продуктами выбранной категории
-                        await Navigation.PushAsync(new ProductsPage(selectedCategory.Id));
+                        await Navigation.PushAsync(new ProductsPage(selectedCategory.Id, _client)); // Передаем клиент
                     }
                 }
             };
@@ -81,11 +82,12 @@ namespace ShopApp.Pages
                 await DisplayAlert("Ошибка", "Не удалось загрузить продукты", "OK");
             }
         }
+
         // Обработчик кнопки Каталог
         private async void OnCatalogButtonClicked(object sender, EventArgs e)
         {
             // Переход на страницу каталога (ProductsPage) с дефолтным selectedCategoryId (например, 0)
-            await Navigation.PushAsync(new ProductsPage(0));
+            await Navigation.PushAsync(new ProductsPage(0, _client)); // Передаем клиента при переходе
         }
 
         // Обработчик кнопки Профиль
@@ -94,15 +96,22 @@ namespace ShopApp.Pages
             // Переход на страницу профиля (ProfilePage)
             await Navigation.PushAsync(new ProfilePage());
         }
+
         private async void OnHomeButtonClicked(object sender, EventArgs e)
         {
-            
+            // Логика для кнопки "Домой", если потребуется
         }
 
         private async void OnDetailsProductButtonClicked(object sender, EventArgs e)
         {
-            // Переход на страницу "Подробности" (DetailsProductPage)
-            await Navigation.PushAsync(new DetailsProductPage());
+            var button = sender as Button;
+            var selectedProduct = button?.BindingContext as Product;
+
+            if (selectedProduct != null)
+            {
+                // Переход на страницу деталей товара
+                await Navigation.PushAsync(new DetailsProductPage(selectedProduct, _client));
+            }
         }
     }
 }

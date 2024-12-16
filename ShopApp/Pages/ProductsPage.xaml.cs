@@ -7,19 +7,24 @@ namespace ShopApp.Pages
     public partial class ProductsPage : ContentPage
     {
         private readonly ProductService _productService;
+        private readonly Client _client; // Добавлен экземпляр клиента для хранения данных о пользователе
         public List<Product> Products { get; set; }
         public List<Category> Categories { get; set; }
 
-        public ProductsPage(int selectedCategoryId)
+        public ProductsPage(int selectedCategoryId, Client client) // Передаем клиента при создании страницы
         {
             InitializeComponent();
             _productService = new ProductService();
+            _client = client; // Присваиваем клиента
             Categories = new List<Category>();
             Products = new List<Product>();
 
-            // Загружаем категории и продукты для выбранной категории
+            // Устанавливаем имя клиента в Label
+            LabelClientName.Text = _client.FullName;
+
+            // Загружаем категории и продукты
             LoadCategories();
-            LoadProducts(selectedCategoryId); // Загружаем продукты для выбранной категории или все продукты (если selectedCategoryId == 0)
+            LoadProducts(selectedCategoryId);
         }
 
         // Метод для загрузки категорий
@@ -70,6 +75,18 @@ namespace ShopApp.Pages
             else
             {
                 await DisplayAlert("Ошибка", "Не удалось загрузить продукты", "OK");
+            }
+        }
+
+        private async void OnDetailsProductButtonClicked(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            var selectedProduct = button?.BindingContext as Product;
+
+            if (selectedProduct != null)
+            {
+                // Переход на страницу деталей товара
+                await Navigation.PushAsync(new DetailsProductPage(selectedProduct, _client));
             }
         }
 
