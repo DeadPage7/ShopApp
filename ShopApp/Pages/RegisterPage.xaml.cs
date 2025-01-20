@@ -1,52 +1,77 @@
+п»їusing Microsoft.Extensions.Logging.Abstractions;
 using ShopApp.Models;
-using ShopApp.Services;
 using System;
+using System.Net.Http.Headers;
+using System.Net.Http;
+using System.Text.Json;
 
 namespace ShopApp.Pages
 {
     public partial class RegisterPage : ContentPage
     {
-        private readonly AuthService _authService;
-
+        private readonly HttpClient _httpClient = new HttpClient();
         public RegisterPage()
         {
             InitializeComponent();
-            _authService = new AuthService();
         }
 
-        // Метод для регистрации
         private async void OnRegisterClicked(object sender, EventArgs e)
         {
-            // Получаем данные из полей
-            var login = RegisterLoginEntry.Text;
-            var password = RegisterPasswordEntry.Text;
-            var passwordConfirmation = RegisterPasswordConfirmationEntry.Text;
-            var fullName = RegisterFullNameEntry.Text;
-            var email = RegisterEmailEntry.Text;
-            var birth = RegisterBirthEntry.Date;
-            var telephone = RegisterTelephoneEntry.Text;
-
-            // Выполняем запрос на регистрацию
-            var client = await _authService.RegisterAsync(login, password, passwordConfirmation, fullName, email, birth, telephone);
-
-            // Проверяем, что регистрация прошла успешно
-            if (client != null)
+            // ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  ГЇГіГ±ГІГ»ГҐ ГЇГ®Г«Гї
+            if (string.IsNullOrWhiteSpace(RegisterLoginEntry.Text) ||
+                string.IsNullOrWhiteSpace(RegisterPasswordEntry.Text) ||
+                string.IsNullOrWhiteSpace(RegisterPasswordConfirmationEntry.Text) ||
+                string.IsNullOrWhiteSpace(RegisterFullNameEntry.Text) ||
+                    string.IsNullOrWhiteSpace(RegisterEmailEntry.Text) ||
+                    string.IsNullOrWhiteSpace(RegisterBirthEntry.Text))
             {
-                // Переход на главную страницу и передача данных клиента и сервиса для продуктов
-                var productService = new ProductService();
-                await Navigation.PushAsync(new HomePage(client, productService)); // Передаем объект Client и сервис для продуктов
+                await DisplayAlert("РћС€РёР±РєР°", "Р’СЃРµ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ РїРѕР»СЏ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ Р·Р°РїРѕР»РЅРµРЅС‹", "РћРљ");
+                return;
             }
-            else
+
+            if (RegisterPasswordEntry.Text != RegisterPasswordConfirmationEntry.Text)
             {
-                // Показать сообщение об ошибке, если регистрация не удалась
-                await DisplayAlert("Ошибка", "Не удалось зарегистрировать пользователя. Попробуйте снова.", "OK");
+                await DisplayAlert("РћС€РёР±РєР°", "РџР°СЂРѕР»Рё РЅРµ СЃРѕРІРїР°РґР°СЋС‚", "РћРљ");
+                return;
+            }
+            string fullname = RegisterFullNameEntry.Text;
+            string login = RegisterLoginEntry.Text;
+            string password = RegisterPasswordEntry.Text;
+            string? phone = RegisterTelephoneEntry.Text;
+
+            var registerData = new MultipartFormDataContent
+        {
+            { new StringContent(fullname), "full_name" },
+            { new StringContent(phone ?? string.Empty), "telephone" },
+            { new StringContent(login), "login" },
+            { new StringContent(password), "password" },
+        };
+
+            try
+            {
+                HttpResponseMessage response = await _httpClient.PostAsync("http://course-project-4/api/register", registerData);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await DisplayAlert("РЈСЃРїРµС…", "Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅС‹", "РћРљ");
+                }
+                else
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    await DisplayAlert("РћС€РёР±РєР°", $"РћРїРёСЃР°РЅРёРµ: {(int)response.StatusCode}\n{errorContent}", "РћРљ");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("РћС€РёР±РєР°", ex.Message, "РћРљ");
             }
         }
 
-        // Переход на страницу авторизации
+        // РџРµСЂРµС…РѕРґ РЅР° СЃС‚СЂР°РЅРёС†Сѓ Р°РІС‚РѕСЂРёР·Р°С†РёРё
         private async void OnLoginPageClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new LoginPage()); // Переход на страницу логина
+            await Navigation.PushAsync(new LoginPage()); // РџРµСЂРµС…РѕРґ РЅР° СЃС‚СЂР°РЅРёС†Сѓ Р»РѕРіРёРЅР°
         }
     }
 }

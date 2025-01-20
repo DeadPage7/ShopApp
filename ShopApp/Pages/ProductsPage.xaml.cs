@@ -1,80 +1,85 @@
 using ShopApp.Models;
-using ShopApp.Services;
 using System.Collections.Generic;
 
 namespace ShopApp.Pages
 {
     public partial class ProductsPage : ContentPage
     {
-        private readonly ProductService _productService;
         private readonly Client _client; // Добавлен экземпляр клиента для хранения данных о пользователе
+        private string _token;
         public List<Product> Products { get; set; }
         public List<Category> Categories { get; set; }
 
-        public ProductsPage(int selectedCategoryId, Client client) // Передаем клиента при создании страницы
+        public ProductsPage(int selectedCategoryId, Client client, string token)
         {
             InitializeComponent();
-            _productService = new ProductService();
-            _client = client; // Присваиваем клиента
+            _client = client;
+            _token = token;
+
             Categories = new List<Category>();
             Products = new List<Product>();
 
-            // Устанавливаем имя клиента в Label
             LabelClientName.Text = _client.FullName;
 
             // Загружаем категории и продукты
             LoadCategories();
             LoadProducts(selectedCategoryId);
+
+            // Устанавливаем обработчик выбора категории
+            CategoryCollectionView.SelectionChanged += async (sender, e) =>
+            {
+                if (e.CurrentSelection.Count > 0)
+                {
+                    var selectedCategory = e.CurrentSelection[0] as Category;
+                    if (selectedCategory != null)
+                    {
+                        await DisplayProductsByCategory(selectedCategory.Id);
+                    }
+                }
+            };
         }
 
-        // Метод для загрузки категорий
         private async void LoadCategories()
         {
-            var categories = await _productService.GetCategoriesAsync();
-            if (categories != null)
+            try
             {
-                // Добавляем "Все товары" в начало списка категорий
-                Categories.Clear();
-                Categories.Add(new Category { Id = 0, Name = "Все товары" });
-                Categories.AddRange(categories);
-
-                CategoryCollectionView.ItemsSource = Categories; // Привязываем категории к CollectionView
+                var productService = new ProductService(_token);
+                Categories = await productService.GetCategoriesAsync();
+                CategoryCollectionView.ItemsSource = Categories;
             }
-            else
+            catch (Exception ex)
             {
-                await DisplayAlert("Ошибка", "Не удалось загрузить категории", "OK");
+                await DisplayAlert("Ошибка", $"Не удалось загрузить категории: {ex.Message}", "ОК");
             }
         }
 
-        // Метод для загрузки продуктов
         private async void LoadProducts(int categoryId)
         {
-            List<Product> products;
-
-            if (categoryId == 0)
+            try
             {
-                // Если выбран "Все товары", загружаем все продукты
-                products = await _productService.GetProductsAsync();
+                var productService = new ProductService(_token);
+                Products = categoryId == 0
+                    ? await productService.GetProductsAsync()
+                    : await productService.GetProductsByCategoryAsync(categoryId);
+                ProductsCollectionView.ItemsSource = Products;
             }
-            else
+            catch (Exception ex)
             {
-                // Загружаем продукты для выбранной категории
-                products = await _productService.GetProductsByCategoryAsync(categoryId);
+                await DisplayAlert("Ошибка", $"Не удалось загрузить продукты: {ex.Message}", "ОК");
             }
+        }
 
-            if (products != null)
+        private async Task DisplayProductsByCategory(int categoryId)
+        {
+            try
             {
-                // Обновляем список продуктов
-                Products.Clear();
-                Products.AddRange(products);
-
-                // Перезаписываем привязку для обновления данных в UI
-                ProductsCollectionView.ItemsSource = null; // Очищаем текущую привязку
-                ProductsCollectionView.ItemsSource = Products; // Устанавливаем заново
+                var productService = new ProductService(_token);
+                Products = await productService.GetProductsByCategoryAsync(categoryId);
+                ProductsCollectionView.ItemsSource = Products;
             }
-            else
+            catch (Exception ex)
             {
-                await DisplayAlert("Ошибка", "Не удалось загрузить продукты", "OK");
+                await DisplayAlert("Ошибка", $"Не удалось загрузить продукты: {ex.Message}", "ОК");
             }
         }
 
@@ -89,23 +94,20 @@ namespace ShopApp.Pages
                 await Navigation.PushAsync(new DetailsProductPage(selectedProduct, _client));
             }
         }
-
-        // Обработчик для изменения выбранной категории
-        private void OnCategorySelected(object sender, SelectionChangedEventArgs e)
+        private async void OnHomeButtonClicked(object sender, EventArgs e)
         {
-            if (e.CurrentSelection.Count > 0)
-            {
-                // Получаем выбранную категорию
-                var selectedCategory = e.CurrentSelection[0] as Category;
-                if (selectedCategory != null)
-                {
-                    // Загружаем продукты для выбранной категории
-                    LoadProducts(selectedCategory.Id);
+            await Navigation.PushAsync(new HomePage(_client, _token)); // 0 для всех продуктов
+        }
+        // Обработчик кнопки Каталог
+        private async void OnCatalogButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ProductsPage(0, _client, _token)); // 0 для всех продуктов
+        }
 
-                    // Снимаем выделение, чтобы избежать повторных загрузок
-                    ((CollectionView)sender).SelectedItem = null;
-                }
-            }
+        // Обработчик кнопки Профиль
+        private async void OnProfileButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new ProfilePage(_client, _token));
         }
     }
 }

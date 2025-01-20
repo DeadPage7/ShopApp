@@ -130,7 +130,7 @@
                          HeightRequest="40" 
                          WidthRequest="40" 
                          BackgroundColor="Transparent"
-                         Clicked="OnHomeButtonClicked" />
+                          />
                     <Label Text="Главная" 
                    FontSize="12" 
                    TextColor="#EAE4C2" 

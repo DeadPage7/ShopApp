@@ -1,43 +1,78 @@
-using ShopApp.Models;
-using ShopApp.Services;
+п»їusing ShopApp.Models;
 using ShopApp.Pages;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 
 namespace ShopApp.Pages
 {
     public partial class LoginPage : ContentPage
     {
-        private readonly AuthService _authService;
-
+        private readonly HttpClient _httpClient = new HttpClient();
         public LoginPage()
         {
             InitializeComponent();
-            _authService = new AuthService();
         }
 
-        // Обработка логина
         private async void OnLoginClicked(object sender, EventArgs e)
         {
-            var login = LoginEntry.Text;
-            var password = PasswordEntry.Text;
+            string login = LoginEntry.Text;
+            string password = PasswordEntry.Text;
 
-            var client = await _authService.LoginAsync(login, password);
-
-            if (client != null)
+            if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(password))
             {
-                // Успешный вход, создаем экземпляр сервиса для продуктов
-                var productService = new ProductService();
-                await Navigation.PushAsync(new HomePage(client, productService)); // Передаем данные клиента и сервис продуктов
+                await DisplayAlert("РћС€РёР±РєР°", "Р’РІРµРґРёС‚Рµ Р»РѕРіРёРЅ Рё РїР°СЂРѕР»СЊ", "РћРљ");
+                return;
+            }
+
+            try
+            {
+                var loginResponse = await AuthenticateUserAsync(login, password);
+
+                if (loginResponse != null)
+                {
+
+                    // РџРµСЂРµС…РѕРґ РЅР° РіР»Р°РІРЅСѓСЋ СЃС‚СЂР°РЅРёС†Сѓ
+                    await Navigation.PushAsync(new HomePage(loginResponse.Client, loginResponse.Token));
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("РћС€РёР±РєР°", $"РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°: {ex.Message}", "РћРљ");
+            }
+            finally
+            {
+
+            }
+        }
+
+        private async Task<AuthResponse> AuthenticateUserAsync(string login, string password)
+        {
+            var loginData = new { login, password };
+            var jsonContent = new StringContent(JsonSerializer.Serialize(loginData), Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await _httpClient.PostAsync("http://course-project-4/api/login", jsonContent);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                return JsonSerializer.Deserialize<AuthResponse>(content);
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+            {
+                await DisplayAlert("РћС€РёР±РєР° РІС…РѕРґР°", "РќРµРїСЂР°РІРёР»СЊРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ", "РћРљ");
             }
             else
             {
-                // Ошибка авторизации
-                await DisplayAlert("Ошибка", "Неверный логин или пароль", "OK");
+                await DisplayAlert("РћС€РёР±РєР°", "РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РЅР° СЃРµСЂРІРµСЂРµ", "РћРљ");
             }
-        }
 
-        private async void OnRegisterPageClicked(object sender, EventArgs e)
+            return null;
+        }
+private async void OnRegisterPageClicked(object sender, TappedEventArgs e)
         {
-            await Navigation.PushAsync(new RegisterPage()); // Открываем страницу регистрации
+            await Navigation.PushAsync(new RegisterPage());
         }
     }
+    
 }

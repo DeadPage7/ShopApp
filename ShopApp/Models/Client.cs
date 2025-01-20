@@ -1,36 +1,34 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace ShopApp.Models
 {
     public class Client
     {
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public int Id { get; set; }
 
-        [JsonProperty("full_name")]
+        [JsonPropertyName("full_name")]
         public string FullName { get; set; }
 
-        [JsonProperty("email")]
+        [JsonPropertyName("password")]
+        public string? Password { get; set; } = null;
+
+        [JsonPropertyName("email")]
         public string Email { get; set; }
 
-        [JsonProperty("login")]
+        [JsonPropertyName("login")]
         public string Login { get; set; }
 
-        [JsonProperty("birth")]
-        public DateTime Birth { get; set; }
+        [JsonPropertyName("birth")]
+        public string Birth { get; set; }
 
-        [JsonProperty("telephone")]
-        public string Telephone { get; set; }
+        [JsonPropertyName("telephone")]
+        public string? Telephone { get; set; }
 
-        [JsonProperty("token")]
-        public string Token { get; set; } // Токен для авторизации
-    }
-    public class AuthResponse
-    {
-        [JsonProperty("client")] // Маппинг для объекта клиента
-        public Client Client { get; set; }
+        [JsonPropertyName("created_at")]
+        public DateTime CreatedAt { get; set; }
 
-        [JsonProperty("message")] // Если есть сообщение в ответе
-        public string Message { get; set; }
+        [JsonPropertyName("updated_at")]
+        public DateTime UpdatedAt { get; set; }
     }
 }
