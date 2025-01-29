@@ -94,8 +94,13 @@ namespace ShopApp.Pages
 
             if (selectedProduct != null)
             {
-                await Navigation.PushAsync(new DetailsProductPage(selectedProduct, _client));
+                await Navigation.PushAsync(new DetailsProductPage(selectedProduct, _client, _token));
             }
+        }
+
+        private async void OnCartButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CartPage(_client, _token));
         }
     }
 

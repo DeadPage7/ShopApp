@@ -91,7 +91,7 @@ namespace ShopApp.Pages
             if (selectedProduct != null)
             {
                 // Переход на страницу деталей товара
-                await Navigation.PushAsync(new DetailsProductPage(selectedProduct, _client));
+                await Navigation.PushAsync(new DetailsProductPage(selectedProduct, _client, _token));
             }
         }
         private async void OnHomeButtonClicked(object sender, EventArgs e)
@@ -108,6 +108,11 @@ namespace ShopApp.Pages
         private async void OnProfileButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new ProfilePage(_client, _token));
+        }
+
+        private async void OnCartButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new CartPage(_client, _token));
         }
     }
 }

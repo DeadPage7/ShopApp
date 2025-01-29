@@ -28,7 +28,7 @@
                              WidthRequest="30" 
                              Grid.Column="2" 
                              VerticalOptions="Center"
-                             BackgroundColor="Transparent"/>
+                             BackgroundColor="Transparent" Clicked="OnCartButtonClicked"/>
             </Grid>
 
             <BoxView HeightRequest="5" BackgroundColor="#719442"/>

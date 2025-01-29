@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopApp.Pages.CartPage"
+             Title="Корзина">
+    <!-- Обернули весь контент в ScrollView -->
+    <ScrollView>
+        <VerticalStackLayout Padding="15" Spacing="10">
+
+            <!-- Заголовок -->
+            <Label 
+                Text="🛒 Ваша корзина"
+                FontSize="24"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" 
+                TextColor="Black"/>
+
+            <BoxView HeightRequest="2" Color="Gray" Opacity="0.5"/>
+
+            <!-- Список товаров -->
+            <CollectionView x:Name="CartItemsView"
+                    ItemsSource="{Binding Cartes}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Gray" Padding="10" Margin="5"
+                               CornerRadius="10" HasShadow="True">
+                            <HorizontalStackLayout Spacing="15">
+                                <Image Source="{Binding Photo}" 
+                                       HeightRequest="100" 
+                                       WidthRequest="100"
+                                       Aspect="AspectFit"
+                                       BackgroundColor="White"
+                                       VerticalOptions="Center"/>
+
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding Name}" 
+                                           FontSize="18" 
+                                           FontAttributes="Bold"
+                                           TextColor="Black"/>
+
+                                    <Label Text="{Binding Price, StringFormat='💰 Цена: {0:C}'}" 
+                                           FontSize="16" 
+                                           TextColor="DarkGreen"/>
+
+                                    <Label Text="{Binding Quantity, StringFormat='📦 Количество: {0}'}" 
+                                           FontSize="16" 
+                                           TextColor="DarkBlue"/>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <BoxView HeightRequest="2" Color="Gray" Opacity="0.5"/>
+
+            <!-- Общая стоимость -->
+            <Label x:Name="TotalCostLabel"
+                   Text="Общая стоимость: 0 ₽"
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   HorizontalOptions="End"
+                   TextColor="Black"/>
+
+            <!-- Кнопка оформления заказа -->
+            <Button Text="✅ Оформить заказ"
+                    x:Name="OrderButton"
+                    IsVisible="False"
+                    BackgroundColor="Green"
+                    TextColor="White"
+                    FontSize="18"
+                    CornerRadius="10"
+                    Padding="10"
+                    Clicked="OnOrderButtonClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
