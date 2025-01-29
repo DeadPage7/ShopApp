@@ -10,5 +10,6 @@
         <Entry x:Name="birth" Placeholder="Birth (YYYY-MM-DD)" />
         <Entry x:Name="phone" Placeholder="Phone" />
         <Button Text="Сохранить изменения" Clicked="OnSaveButton" />
+        <Button Text="Просмотреть заказы" Clicked="OnOrdersButton" />
     </StackLayout>
 </ContentPage>

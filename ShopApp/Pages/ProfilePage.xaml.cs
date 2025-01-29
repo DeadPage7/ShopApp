@@ -102,4 +102,8 @@ public partial class ProfilePage : ContentPage
         }
     }
 
+    private async void OnOrdersButton(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new OrderPage(_client, _token));
+    }
 }

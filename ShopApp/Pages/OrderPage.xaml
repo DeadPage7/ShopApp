@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopApp.Pages.OrderPage"
+             Title="Мои заказы">
+    <VerticalStackLayout Padding="10">
+
+        <!-- Заголовок -->
+        <Label Text="Мои заказы"
+               FontSize="24"
+               FontAttributes="Bold"
+               HorizontalOptions="Center" />
+
+        <!-- Список заказов -->
+        <CollectionView x:Name="OrdersListView">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="Gray" Padding="10" Margin="5">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Id}" 
+                                   FontSize="18" 
+                                   FontAttributes="Bold" />
+                            <Label Text="{Binding OrderDate}" FontSize="14" />
+                            <Label Text="{Binding TotalPrice, StringFormat='Итого: {0:C}'}" 
+                                   FontSize="16"
+                                   FontAttributes="Bold"
+                                   TextColor="Green"/>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Сообщение, если нет заказов -->
+        <Label x:Name="NoOrdersLabel" 
+               Text="У вас пока нет заказов." 
+               IsVisible="False" 
+               HorizontalOptions="Center"
+               FontSize="16"
+               TextColor="Gray"/>
+
+    </VerticalStackLayout>
+</ContentPage>
