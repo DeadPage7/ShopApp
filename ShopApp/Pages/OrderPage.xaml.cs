@@ -82,4 +82,12 @@ public partial class OrderPage : ContentPage
         }
     }
 
+    private async void ViewOrder_Clicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.CommandParameter is int orderId)
+        {
+            await Navigation.PushAsync(new DetailsOrderPage(_client, orderId, _token));
+        }
+    }
+
 }

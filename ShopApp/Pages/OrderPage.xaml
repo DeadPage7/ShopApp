@@ -27,6 +27,7 @@
                             <Button Text="Удалить" TextColor="White" BackgroundColor="Red"
                     Clicked="DeleteOrder_Clicked"
                     CommandParameter="{Binding Id}" />
+                            <Button Text="Просмотр" Clicked="ViewOrder_Clicked" CommandParameter="{Binding Id}" />
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>
