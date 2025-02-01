@@ -11,7 +11,7 @@ namespace ShopApp.Models
         public string Name { get; set; }
 
         [JsonPropertyName("price")]
-        public decimal Price { get; set; }
+        public string Price { get; set; }
 
         [JsonPropertyName("photo")]
         public string Photo { get; set; }

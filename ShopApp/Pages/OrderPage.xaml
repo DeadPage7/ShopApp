@@ -17,14 +17,16 @@
                 <DataTemplate>
                     <Frame BorderColor="Gray" Padding="10" Margin="5">
                         <VerticalStackLayout>
-                            <Label Text="{Binding Id}" 
-                                   FontSize="18" 
-                                   FontAttributes="Bold" />
-                            <Label Text="{Binding OrderDate}" FontSize="14" />
-                            <Label Text="{Binding TotalPrice, StringFormat='Итого: {0:C}'}" 
-                                   FontSize="16"
-                                   FontAttributes="Bold"
-                                   TextColor="Green"/>
+                            <Label Text="{Binding Id, StringFormat='Заказ №{0}'}" FontSize="18" FontAttributes="Bold" />
+                            <Label Text="{Binding OrderDate, StringFormat='Дата оформления: {0:dd.MM.yyyy}'}" FontSize="14" />
+                            <Label Text="{Binding TotalCost, StringFormat='Итого: {0:C}'}" FontSize="16"
+                   FontAttributes="Bold" TextColor="Green"/>
+                            <Label Text="{Binding Status.Name, StringFormat='Статус: {0}'}" />
+
+                            <!-- Кнопка удаления -->
+                            <Button Text="Удалить" TextColor="White" BackgroundColor="Red"
+                    Clicked="DeleteOrder_Clicked"
+                    CommandParameter="{Binding Id}" />
                         </VerticalStackLayout>
                     </Frame>
                 </DataTemplate>

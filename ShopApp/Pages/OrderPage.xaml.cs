@@ -24,7 +24,7 @@ public partial class OrderPage : ContentPage
         {
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
 
-            HttpResponseMessage response = await _httpClient.GetAsync($"http://course-project-4/api/orders/{_client.Id}");
+            HttpResponseMessage response = await _httpClient.GetAsync($"http://course-project-4/api/orders");
 
             if (response.IsSuccessStatusCode)
             {
@@ -51,4 +51,35 @@ public partial class OrderPage : ContentPage
             await DisplayAlert("Ошибка", $"Ошибка загрузки заказов: {ex.Message}", "OK");
         }
     }
+
+    private async void DeleteOrder_Clicked(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.CommandParameter is int orderId)
+        {
+            bool confirm = await DisplayAlert("Подтверждение", "Вы действительно хотите удалить заказ?", "Да", "Нет");
+            if (!confirm) return;
+
+            try
+            {
+                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+
+                HttpResponseMessage response = await _httpClient.DeleteAsync($"http://course-project-4/api/orders/{orderId}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await DisplayAlert("Успех", "Заказ удален", "OK");
+                    LoadOrders(); // Обновляем список заказов
+                }
+                else
+                {
+                    await DisplayAlert("Ошибка", "Не удалось удалить заказ", "OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Ошибка", $"Ошибка удаления заказа: {ex.Message}", "OK");
+            }
+        }
+    }
+
 }
