@@ -24,6 +24,10 @@ public partial class CartPage : ContentPage
         LoadCartData(); // Загрузка данных корзины
     }
 
+    private async void OnOrderButtonClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new CreateOrderPage(_client, _token));
+    }
     private async void LoadCartData()
     {
         try
@@ -83,30 +87,6 @@ public partial class CartPage : ContentPage
         catch (Exception ex)
         {
             await DisplayAlert("Ошибка сети", ex.Message, "OK");
-        }
-    }
-
-    private async void OnOrderButtonClicked(object sender, EventArgs e)
-    {
-        try
-        {
-            HttpResponseMessage response = await _httpClient.PostAsync("http://course-project-4/api/orders", null);
-
-            if (response.IsSuccessStatusCode)
-            {
-                await DisplayAlert("Заказ", "Ваш заказ оформлен!", "OK");
-                await Navigation.PushAsync(new HomePage(_client, _token));
-            }
-            else
-            {
-                var errorContent = await response.Content.ReadAsStringAsync();
-                await DisplayAlert("Ошибка", $"Описание: {(int)response.StatusCode}\n{errorContent}", "ОК");
-            }
-
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Ошибка", ex.Message, "ОК");
         }
     }
 }

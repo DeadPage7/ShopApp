@@ -96,7 +96,7 @@ namespace ShopApp.Pages
         }
         private async void OnHomeButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new HomePage(_client, _token)); // 0 для всех продуктов
+            await Navigation.PushAsync(new HomePage(_client, _token));
         }
         // Обработчик кнопки Каталог
         private async void OnCatalogButtonClicked(object sender, EventArgs e)

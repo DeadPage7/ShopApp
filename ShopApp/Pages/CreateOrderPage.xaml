@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopApp.Pages.CreateOrderPage"
+             Title="Address Page">
+    <VerticalStackLayout>
+        <Label Text="Выберите адрес куда доставить:"
+               FontSize="24"
+               HorizontalOptions="Center" />
+
+        <!-- Список адресов -->
+        <CollectionView x:Name="AddressesCollectionView"
+                        ItemsSource="{Binding Addresses}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5">
+                        <StackLayout>
+                            <Label Text="{Binding City}" FontSize="18"/>
+                            <Label Text="{Binding Street}" />
+                            <Label Text="{Binding House}" />
+                            <Button Text="Select" Clicked="OnSelectAddressClicked"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Оформить заказ" Clicked="OnPaymentButton"></Button>
+    </VerticalStackLayout>
+</ContentPage>
