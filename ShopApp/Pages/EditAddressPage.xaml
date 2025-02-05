@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopApp.Pages.EditAddressPage"
+             Title="Редактирование адреса">
+    <VerticalStackLayout Padding="20">
+        <Label Text="Город:" FontSize="18"/>
+        <Entry x:Name="CityEntry" FontSize="18" />
+
+        <Label Text="Улица:" FontSize="18"/>
+        <Entry x:Name="StreetEntry" FontSize="18" />
+
+        <Label Text="Дом:" FontSize="18"/>
+        <Entry x:Name="HouseEntry" FontSize="18" />
+
+        <Label Text="Этаж:" FontSize="18"/>
+        <Entry x:Name="FloorEntry" FontSize="18" Keyboard="Numeric" />
+
+        <Label Text="Квартира/офис:" FontSize="18"/>
+        <Entry x:Name="ApartmentOrOfficeEntry" FontSize="18" />
+
+        <Label Text="Подъезд:" FontSize="18"/>
+        <Entry x:Name="EntranceEntry" FontSize="18" />
+
+        <Label Text="Домофон:" FontSize="18"/>
+        <Entry x:Name="IntercomEntry" FontSize="18" />
+
+        <Label Text="Комментарий:" FontSize="18"/>
+        <Editor x:Name="CommentEditor" FontSize="18" HeightRequest="100"/>
+
+        <Button Text="Сохранить изменения" Clicked="OnSaveButtonClicked" />
+    </VerticalStackLayout>
+</ContentPage>

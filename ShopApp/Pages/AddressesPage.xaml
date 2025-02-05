@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopApp.Pages.AddressesPage"
+             Title="Ваши адреса">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ScrollView>
+            <VerticalStackLayout Padding="10">
+                <Label Text="Ваши адреса:" FontSize="24" HorizontalOptions="Center" />
+
+                <CollectionView x:Name="AddressesCollectionView"
+                                SelectionChanged="OnAddressTapped"
+                                SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="5" ColumnDefinitions="*, Auto">
+                                <!-- Колонка 1: Информация об адресе -->
+                                <Frame Grid.Column="0" Padding="10" Margin="5" BorderColor="Gray" CornerRadius="10">
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding City}" FontSize="18" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Street}" />
+                                        <Label Text="{Binding House, StringFormat='Дом: {0}'}" />
+                                        <Label Text="{Binding Floor, StringFormat='Этаж: {0}'}" />
+                                        <Label Text="{Binding ApartmentOrOffice, StringFormat='Квартира/офис: {0}'}" />
+                                        <Label Text="{Binding Entrance, StringFormat='Подъезд: {0}'}" />
+                                        <Label Text="{Binding Intercom, StringFormat='Домофон: {0}'}" />
+                                        <Label Text="{Binding Comment, StringFormat='Комментарий: {0}'}" />
+                                    </VerticalStackLayout>
+                                </Frame>
+
+                                <!-- Колонка 2: Кнопка удаления -->
+                                <Button Grid.Column="1"
+                                        Text="❌"
+                                        BackgroundColor="Transparent"
+                                        TextColor="Red"
+                                        FontSize="20"
+                                        Padding="5"
+                                        Clicked="OnDeleteAddressClicked"
+                                        CommandParameter="{Binding}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Button Grid.Row="1"
+                Text="Создать адрес"
+                FontAttributes="Bold"
+                BackgroundColor="#6200EE"
+                TextColor="White"
+                CornerRadius="25"
+                Padding="15"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="End"
+                Margin="10"
+                Clicked="OnCreateAddressClicked" />
+    </Grid>
+</ContentPage>

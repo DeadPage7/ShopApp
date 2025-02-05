@@ -2,29 +2,63 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ShopApp.Pages.CreateOrderPage"
-             Title="Address Page">
-    <VerticalStackLayout>
-        <Label Text="Выберите адрес куда доставить:"
+             Title="Выбор адреса">
+    <Grid>
+        <!-- Определяем строки для Grid -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <!-- Контент (бонусы, индикатор загрузки, сообщение) -->
+            <RowDefinition Height="Auto" />
+            <!-- Кнопка -->
+        </Grid.RowDefinitions>
+        <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+        <Label Text="Выберите адрес доставки:"
                FontSize="24"
-               HorizontalOptions="Center" />
+               FontAttributes="Bold"
+               HorizontalOptions="Center" 
+               Margin="0,10,0,20"/>
 
         <!-- Список адресов -->
         <CollectionView x:Name="AddressesCollectionView"
-                        ItemsSource="{Binding Addresses}">
+                SelectionMode="Single"
+                SelectionChanged="OnAddressSelected">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5">
-                        <StackLayout>
-                            <Label Text="{Binding City}" FontSize="18"/>
-                            <Label Text="{Binding Street}" />
-                            <Label Text="{Binding House}" />
-                            <Button Text="Select" Clicked="OnSelectAddressClicked"/>
+                        <StackLayout Spacing="10">
+                            <Frame Padding="15" Margin="0,0,0,10" BorderColor="LightGray" CornerRadius="10">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding City}" FontSize="18" FontAttributes="Bold" />
+                                    <Label Text="{Binding Street}" FontSize="16" />
+                                    <Label Text="{Binding House}" FontSize="16" />
+                                </VerticalStackLayout>
+                            </Frame>
                         </StackLayout>
-                    </Frame>
-                </DataTemplate>
+                    </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <Button Text="Оформить заказ" Clicked="OnPaymentButton"></Button>
+        <!-- Выбранный адрес -->
+        <Frame Padding="10" Margin="0,10,0,10" BorderColor="Gray" CornerRadius="10">
+            <Label x:Name="SelectedAddressLabel"
+                   Text="Адрес не выбран"
+                   FontSize="18"
+                   TextColor="DarkBlue"
+                   HorizontalOptions="Center"/>
+        </Frame>
+
+        <Button Text="Оформить заказ"
+                FontSize="18"
+                FontAttributes="Bold"
+                BackgroundColor="#6200EE"
+                TextColor="White"
+                CornerRadius="25"
+                Padding="15"
+                HorizontalOptions="FillAndExpand"
+                Clicked="OnPaymentButton"/>
     </VerticalStackLayout>
+    </ScrollView>
+    </Grid>
+    
+    
 </ContentPage>

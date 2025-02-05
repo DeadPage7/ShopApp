@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ShopApp.Pages.CreateAddressPage"
+             Title="Добавить адрес">
+    <VerticalStackLayout Padding="20" Spacing="10">
+
+        <Label Text="Введите данные адреса:" FontSize="24" HorizontalOptions="Center"/>
+
+        <Entry x:Name="CityEntry" Placeholder="Город"/>
+        <Entry x:Name="StreetEntry" Placeholder="Улица"/>
+        <Entry x:Name="HouseEntry" Placeholder="Дом"/>
+        <Entry x:Name="FloorEntry" Placeholder="Этаж" Keyboard="Numeric"/>
+        <Entry x:Name="ApartmentOrOfficeEntry" Placeholder="Квартира/Офис"/>
+        <Entry x:Name="EntranceEntry" Placeholder="Подъезд"/>
+        <Entry x:Name="IntercomEntry" Placeholder="Домофон"/>
+        <Editor x:Name="CommentEditor" Placeholder="Комментарий" AutoSize="TextChanges"/>
+
+        <Button Text="Сохранить адрес" Clicked="OnSaveAddressClicked"/>
+
+    </VerticalStackLayout>
+</ContentPage>

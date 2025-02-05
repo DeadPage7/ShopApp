@@ -106,4 +106,9 @@ public partial class ProfilePage : ContentPage
     {
         await Navigation.PushAsync(new OrderPage(_client, _token));
     }
+
+    private async void OnAddressButton(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new AddressesPage(_client, _token));
+    }
 }
