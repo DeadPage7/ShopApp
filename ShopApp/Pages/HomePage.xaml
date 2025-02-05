@@ -10,7 +10,7 @@
         <!-- Основной контент страницы -->
         <StackLayout Spacing="20" VerticalOptions="FillAndExpand">
             <!-- Верхняя панель -->
-            <Grid ColumnDefinitions="Auto,*,Auto" Padding="10">
+            <Grid ColumnDefinitions="Auto,*,Auto" Padding="20">
                 <!-- Логотип -->
                 <Image Source="logo.png" HeightRequest="40" WidthRequest="40" Grid.Column="0" VerticalOptions="Center" />
 
@@ -24,14 +24,14 @@
 
                 <!-- Иконка корзины -->
                 <ImageButton Source="cart_icon.png" 
-                             HeightRequest="30" 
+                             HeightRequest="20" 
                              WidthRequest="30" 
                              Grid.Column="2" 
                              VerticalOptions="Center"
                              BackgroundColor="Transparent" Clicked="OnCartButtonClicked"/>
             </Grid>
 
-            <BoxView HeightRequest="5" BackgroundColor="#719442"/>
+            <BoxView HeightRequest="5" Margin="0,-30,0,0" BackgroundColor="#719442" />
 
             <!-- Список категорий -->
             <CollectionView x:Name="CategoryCollectionView" 
@@ -44,12 +44,15 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="5" BackgroundColor="#719442" CornerRadius="5" Margin="3" HasShadow="True">
+                        <StackLayout Padding="5">
+                            <Frame Padding="5" BackgroundColor="#719442" CornerRadius="5" Margin="3" HasShadow="True">
                             <Label Text="{Binding Name}" 
                                    FontSize="14" 
                                    TextColor="#EAE4C2" 
                                    HorizontalTextAlignment="Center" />
                         </Frame>
+                        </StackLayout>
+                        
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

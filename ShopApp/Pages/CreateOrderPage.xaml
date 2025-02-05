@@ -4,12 +4,9 @@
              x:Class="ShopApp.Pages.CreateOrderPage"
              Title="Выбор адреса">
     <Grid>
-        <!-- Определяем строки для Grid -->
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <!-- Контент (бонусы, индикатор загрузки, сообщение) -->
             <RowDefinition Height="Auto" />
-            <!-- Кнопка -->
         </Grid.RowDefinitions>
         <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="15">

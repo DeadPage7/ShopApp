@@ -31,7 +31,7 @@
                 </Grid>
 
                 <!-- Линия под верхней панелью -->
-                <BoxView HeightRequest="5" BackgroundColor="#719442" Grid.Row="1" Margin="0,20" />
+                <BoxView HeightRequest="5" BackgroundColor="#719442" Grid.Row="1" Margin="-10,2" />
 
                 <!-- Список категорий -->
                 <CollectionView x:Name="CategoryCollectionView" 
@@ -40,24 +40,27 @@
                                 HorizontalScrollBarVisibility="Never"
                                 HorizontalOptions="Center"
                                 Grid.Row="2"
-                                Margin="10">
+                                Margin="20">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame Padding="5" BackgroundColor="#719442" CornerRadius="5" Margin="3" HasShadow="True">
-                                <Label Text="{Binding Name}" 
+                            <StackLayout Padding="5">
+                                <Frame Padding="5" BackgroundColor="#719442" CornerRadius="5">
+                                    <Label Text="{Binding Name}" 
                                        FontSize="14" 
                                        TextColor="#EAE4C2" 
-                                       HorizontalTextAlignment="Center" />
-                            </Frame>
+                                       HorizontalTextAlignment="Center" 
+                                       Margin="0,0"/>
+                                </Frame>
+                            </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
 
                 <!-- Линия под категориями -->
-                <BoxView HeightRequest="5" BackgroundColor="#719442" Grid.Row="3" Margin="0,20" />
+                <BoxView HeightRequest="5" BackgroundColor="#719442" Grid.Row="3" Margin="-10,2" />
 
                 <!-- Список продуктов -->
                 <CollectionView x:Name="ProductsCollectionView" 
