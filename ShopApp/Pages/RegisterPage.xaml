@@ -50,6 +50,7 @@
 
         <!-- Поле для даты рождения -->
         <Entry x:Name="RegisterBirthEntry" 
+                    Placeholder="Дата рождения" 
                     BackgroundColor="#719442" 
                     TextColor="#EAE4C2" 
                     Margin="0,10" />
@@ -69,10 +70,14 @@
                 Margin="0,10" />
 
         <!-- Кнопка для перехода на страницу логина -->
-        <Button Text="Уже есть аккаунт? Войдите" 
-                BackgroundColor="#719442" 
-                TextColor="#EAE4C2" 
-                Clicked="OnLoginPageClicked" 
-                Margin="0,10" />
+        <Label Text="Авторизированны? тогда войдите."
+       TextColor="#EAE4C2"
+       HorizontalOptions="Center"
+       VerticalOptions="Center"
+       FontSize="14">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnLoginPageClicked" />
+            </Label.GestureRecognizers>
+        </Label>
     </StackLayout>
-</ContentPage>
+</ContentPage> 

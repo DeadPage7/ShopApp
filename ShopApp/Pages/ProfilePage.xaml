@@ -2,15 +2,104 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ShopApp.Pages.ProfilePage"
-             Title="ProfilePage">
-    <StackLayout Padding="20" Spacing="10">
-        <Entry x:Name="fullname" Placeholder="Full Name" />
-        <Entry x:Name="email" Placeholder="Email" />
-        <Entry x:Name="login" Placeholder="Login" />
-        <Entry x:Name="birth" Placeholder="Birth (YYYY-MM-DD)" />
-        <Entry x:Name="phone" Placeholder="Phone" />
-        <Button Text="Просмотреть адреса" Clicked="OnAddressButton" />
-        <Button Text="Сохранить изменения" Clicked="OnSaveButton" />
-        <Button Text="Просмотреть заказы" Clicked="OnOrdersButton" />
-    </StackLayout>
+             Title="Профиль"
+             BackgroundColor="#334D34">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- Основное содержимое -->
+        <StackLayout Padding="20" Spacing="20" Grid.Row="0">
+
+            <!-- Заголовок -->
+            <Label Text="Профиль" 
+                   FontSize="30" 
+                   FontAttributes="Bold" 
+                   TextColor="#EAE4C2"
+                   HorizontalOptions="Center" />
+
+            <!-- Ввод данных -->
+            <Frame BackgroundColor="#719442"
+                   Padding="10"
+                   CornerRadius="20"
+                   HasShadow="True">
+                <StackLayout Spacing="15">
+                    <Entry x:Name="fullname" Placeholder="Полное имя" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                    <Entry x:Name="email" Placeholder="Электронная почта" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                    <Entry x:Name="login" Placeholder="Логин" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                    <Entry x:Name="birth" Placeholder="Дата рождения (YYYY-MM-DD)" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                    <Entry x:Name="phone" Placeholder="Телефон" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Кнопки -->
+            <StackLayout Spacing="15">
+                <Button Text="Просмотреть адреса" 
+                        BackgroundColor="#719442" 
+                        TextColor="#EAE4C2"
+                        CornerRadius="10"
+                        Clicked="OnAddressButton" />
+                <Button Text="Сохранить изменения" 
+                        BackgroundColor="#719442" 
+                        TextColor="#EAE4C2"
+                        CornerRadius="10"
+                        Clicked="OnSaveButton" />
+                <Button Text="Просмотреть заказы" 
+                        BackgroundColor="#719442" 
+                        TextColor="#EAE4C2"
+                        CornerRadius="10"
+                        Clicked="OnOrdersButton" />
+            </StackLayout>
+
+        </StackLayout>
+
+        <!-- Панель навигации внизу -->
+        <StackLayout BackgroundColor="#719442" VerticalOptions="End" Grid.Row="1">
+            <Grid HorizontalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Кнопка Каталог -->
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="0">
+                    <ImageButton Source="product.png" 
+                         HeightRequest="40" 
+                         WidthRequest="40" 
+                         BackgroundColor="Transparent"
+                         Clicked="OnCatalogButtonClicked" />
+                    <Label Text="Каталог" 
+                       FontSize="12" 
+                       TextColor="#EAE4C2" 
+                       HorizontalOptions="Center" />
+                </StackLayout>
+
+                <!-- Кнопка Профиль -->
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="1">
+                    <ImageButton Source="profile.png" 
+                         HeightRequest="40" 
+                         WidthRequest="40" 
+                         BackgroundColor="Transparent"
+                         Clicked="OnProfileButtonClicked" />
+                    <Label Text="Профиль" 
+                       FontSize="12" 
+                       TextColor="#EAE4C2" 
+                       HorizontalOptions="Center" />
+                </StackLayout>
+
+                <!-- Кнопка Главная -->
+                <StackLayout HorizontalOptions="Center" VerticalOptions="Center" Grid.Column="2">
+                    <ImageButton Source="home.png" 
+                         HeightRequest="40" 
+                         WidthRequest="40" 
+                         BackgroundColor="Transparent" 
+                         Clicked="OnHomeButtonClicked"/>
+                    <Label Text="Главная" 
+                       FontSize="12" 
+                       TextColor="#EAE4C2" 
+                       HorizontalOptions="Center" />
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </Grid>
 </ContentPage>

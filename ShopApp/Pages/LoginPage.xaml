@@ -4,7 +4,7 @@
              x:Class="ShopApp.Pages.LoginPage"
              BackgroundColor="#334D34">
 
-    <StackLayout Padding="30" Spacing="20">
+    <StackLayout Padding="30" Spacing="20" HorizontalOptions="Center" VerticalOptions="Center">
         <!-- Логотип -->
         <Image Source="logobig.png" 
                HorizontalOptions="Center" 
@@ -12,7 +12,7 @@
                HeightRequest="100" />
 
         <!-- Приветственное сообщение -->
-        <Label Text="Войдите в ShopApp" 
+        <Label Text="Войдите в Green Harmony" 
                FontSize="32" 
                HorizontalOptions="Center" 
                TextColor="#EAE4C2" 
@@ -48,10 +48,10 @@
 
         <!-- Кнопка для перехода на страницу регистрации -->
         <Label Text="Нет аккаунта? Зарегистрироваться"
-       TextColor="#EAE4C2"
-       HorizontalOptions="Center"
-       VerticalOptions="Center"
-       FontSize="14">
+               TextColor="#EAE4C2"
+               HorizontalOptions="Center"
+               VerticalOptions="Center"
+               FontSize="14">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnRegisterPageClicked" />
             </Label.GestureRecognizers>

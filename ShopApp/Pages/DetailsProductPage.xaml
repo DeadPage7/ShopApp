@@ -5,7 +5,7 @@
              BackgroundColor="#334D34">
 
     <!-- Основная сетка для разделения экрана -->
-    <Grid RowDefinitions="Auto, 2*, 3*" Padding="10">
+    <Grid RowDefinitions="Auto,*,Auto">
 
         <!-- Верхняя панель с логотипом, именем и корзиной -->
         <Grid ColumnDefinitions="Auto,*,Auto" Padding="10">
@@ -32,7 +32,7 @@
         </Grid>
 
         <!-- Верхняя часть: Название и Фото -->
-        <StackLayout Grid.Row="1" Spacing="10" VerticalOptions="Center">
+        <StackLayout Grid.Row="1" Spacing="10" VerticalOptions="Start">
             <BoxView HeightRequest="5" BackgroundColor="#719442"/>
 
             <Label x:Name="ProductName"
@@ -50,25 +50,25 @@
         </StackLayout>
 
         <!-- Нижняя часть: Описание, цена, кнопка и счетчик -->
+        <!-- Изменения: Верхняя часть с закругленными углами, нижняя часть с прямыми -->
         <Frame Grid.Row="2"
                BackgroundColor="#719442"
-               CornerRadius="20"
-               Padding="15"
-               HasShadow="True">
+               Padding="5"
+               VerticalOptions="End">
             <StackLayout Spacing="15">
                 <!-- Заголовок "Подробнее" -->
                 <Label Text="Подробнее"
                        FontSize="28"
                        FontAttributes="Bold"
                        TextColor="#EAE4C2"
-                       HorizontalOptions="Start" />
+                       HorizontalOptions="Center" />
 
                 <!-- Подробное описание -->
                 <Label x:Name="ProductDescription"
                        FontSize="16"
                        TextColor="#EAE4C2"
                        LineBreakMode="WordWrap"
-                       HorizontalTextAlignment="Start" />
+                       HorizontalTextAlignment="Center" />
 
                 <!-- Цена над кнопкой -->
                 <Label x:Name="ProductPrice"
@@ -76,7 +76,7 @@
                        FontAttributes="Bold"
                        TextColor="#EAE4C2"
                        HorizontalOptions="End"
-                       Margin="0,10,0,0"/>
+                       Margin="0,10,45,0"/>
 
                 <!-- Кнопка и счетчик -->
                 <Grid ColumnDefinitions="2*, 3*" Padding="10" ColumnSpacing="10">
@@ -107,7 +107,6 @@
                                 Clicked="OnIncreaseButtonClicked" />
                         <!-- Обработчик для увеличения -->
                     </StackLayout>
-
 
                     <!-- Кнопка "Добавить в корзину" -->
                     <Button Text="Добавить в корзину"

@@ -111,4 +111,18 @@ public partial class ProfilePage : ContentPage
     {
         await Navigation.PushAsync(new AddressesPage(_client, _token));
     }
+    private async void OnCatalogButtonClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ProductsPage(0, _client, _token)); // 0 для всех продуктов
+    }
+
+    // Обработчик кнопки Профиль
+    private async void OnProfileButtonClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new ProfilePage(_client, _token));
+    }
+    private async void OnHomeButtonClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new HomePage(_client, _token));
+    }
 }

@@ -47,12 +47,13 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Padding="5">
-                                <Frame Padding="5" BackgroundColor="#719442" CornerRadius="5">
+                                <!-- Убираем рамку и тень -->
+                                <Frame Padding="5" CornerRadius="5" Margin="3" BackgroundColor="#719442">
                                     <Label Text="{Binding Name}" 
-                                       FontSize="14" 
-                                       TextColor="#EAE4C2" 
-                                       HorizontalTextAlignment="Center" 
-                                       Margin="0,0"/>
+                                           FontSize="18" 
+                                           FontAttributes="Bold"
+                                           TextColor="#EAE4C2" 
+                                           HorizontalTextAlignment="Center" />
                                 </Frame>
                             </StackLayout>
                         </DataTemplate>
