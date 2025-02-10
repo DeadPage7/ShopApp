@@ -2,21 +2,42 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ShopApp.Pages.CreateAddressPage"
-             Title="Добавить адрес">
-    <VerticalStackLayout Padding="20" Spacing="10">
+             Title="Добавить адрес"
+             BackgroundColor="#334D34">
 
-        <Label Text="Введите данные адреса:" FontSize="24" HorizontalOptions="Center"/>
+    <!-- Основное содержимое -->
+    <StackLayout Padding="20" Spacing="20">
 
-        <Entry x:Name="CityEntry" Placeholder="Город"/>
-        <Entry x:Name="StreetEntry" Placeholder="Улица"/>
-        <Entry x:Name="HouseEntry" Placeholder="Дом"/>
-        <Entry x:Name="FloorEntry" Placeholder="Этаж" Keyboard="Numeric"/>
-        <Entry x:Name="ApartmentOrOfficeEntry" Placeholder="Квартира/Офис"/>
-        <Entry x:Name="EntranceEntry" Placeholder="Подъезд"/>
-        <Entry x:Name="IntercomEntry" Placeholder="Домофон"/>
-        <Editor x:Name="CommentEditor" Placeholder="Комментарий" AutoSize="TextChanges"/>
+        <!-- Заголовок -->
+        <Label Text="Введите данные адреса:" 
+               FontSize="30" 
+               FontAttributes="Bold" 
+               TextColor="#EAE4C2"
+               HorizontalOptions="Center" />
 
-        <Button Text="Сохранить адрес" Clicked="OnSaveAddressClicked"/>
+        <!-- Ввод данных адреса -->
+        <Frame BackgroundColor="#719442"
+               Padding="10"
+               CornerRadius="20"
+               HasShadow="True">
+            <StackLayout Spacing="15">
+                <Entry x:Name="CityEntry" Placeholder="Город" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                <Entry x:Name="StreetEntry" Placeholder="Улица" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                <Entry x:Name="HouseEntry" Placeholder="Дом" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                <Entry x:Name="FloorEntry" Placeholder="Этаж" Keyboard="Numeric" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                <Entry x:Name="ApartmentOrOfficeEntry" Placeholder="Квартира/Офис" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                <Entry x:Name="EntranceEntry" Placeholder="Подъезд" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                <Entry x:Name="IntercomEntry" Placeholder="Домофон" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                <Editor x:Name="CommentEditor" Placeholder="Комментарий" AutoSize="TextChanges" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+            </StackLayout>
+        </Frame>
 
-    </VerticalStackLayout>
+        <!-- Кнопка сохранения -->
+        <Button Text="Сохранить адрес" 
+                BackgroundColor="#719442" 
+                TextColor="#EAE4C2"
+                CornerRadius="10"
+                Clicked="OnSaveAddressClicked" />
+    </StackLayout>
+
 </ContentPage>

@@ -2,32 +2,62 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ShopApp.Pages.EditAddressPage"
-             Title="Редактирование адреса">
-    <VerticalStackLayout Padding="20">
-        <Label Text="Город:" FontSize="18"/>
-        <Entry x:Name="CityEntry" FontSize="18" />
+             Title="Редактирование адреса"
+             BackgroundColor="#334D34">
 
-        <Label Text="Улица:" FontSize="18"/>
-        <Entry x:Name="StreetEntry" FontSize="18" />
+    <!-- Добавление ScrollView для прокрутки -->
+    <ScrollView>
 
-        <Label Text="Дом:" FontSize="18"/>
-        <Entry x:Name="HouseEntry" FontSize="18" />
+        <!-- Основное содержимое -->
+        <StackLayout Padding="20" Spacing="20">
 
-        <Label Text="Этаж:" FontSize="18"/>
-        <Entry x:Name="FloorEntry" FontSize="18" Keyboard="Numeric" />
+            <!-- Заголовок -->
+            <Label Text="Редактирование адреса"
+                   FontSize="30" 
+                   FontAttributes="Bold" 
+                   TextColor="#EAE4C2"
+                   HorizontalOptions="Center" />
 
-        <Label Text="Квартира/офис:" FontSize="18"/>
-        <Entry x:Name="ApartmentOrOfficeEntry" FontSize="18" />
+            <!-- Ввод данных адреса -->
+            <Frame BackgroundColor="#719442"
+                   Padding="10"
+                   CornerRadius="20"
+                   HasShadow="True">
+                <StackLayout Spacing="15">
+                    <Label Text="Город:" FontSize="18" TextColor="#EAE4C2"/>
+                    <Entry x:Name="CityEntry" FontSize="18" TextColor="#EAE4C2" BackgroundColor="#334D34" />
 
-        <Label Text="Подъезд:" FontSize="18"/>
-        <Entry x:Name="EntranceEntry" FontSize="18" />
+                    <Label Text="Улица:" FontSize="18" TextColor="#EAE4C2"/>
+                    <Entry x:Name="StreetEntry" FontSize="18" TextColor="#EAE4C2" BackgroundColor="#334D34" />
 
-        <Label Text="Домофон:" FontSize="18"/>
-        <Entry x:Name="IntercomEntry" FontSize="18" />
+                    <Label Text="Дом:" FontSize="18" TextColor="#EAE4C2"/>
+                    <Entry x:Name="HouseEntry" FontSize="18" TextColor="#EAE4C2" BackgroundColor="#334D34" />
 
-        <Label Text="Комментарий:" FontSize="18"/>
-        <Editor x:Name="CommentEditor" FontSize="18" HeightRequest="100"/>
+                    <Label Text="Этаж:" FontSize="18" TextColor="#EAE4C2"/>
+                    <Entry x:Name="FloorEntry" FontSize="18" Keyboard="Numeric" TextColor="#EAE4C2" BackgroundColor="#334D34" />
 
-        <Button Text="Сохранить изменения" Clicked="OnSaveButtonClicked" />
-    </VerticalStackLayout>
+                    <Label Text="Квартира/офис:" FontSize="18" TextColor="#EAE4C2"/>
+                    <Entry x:Name="ApartmentOrOfficeEntry" FontSize="18" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+
+                    <Label Text="Подъезд:" FontSize="18" TextColor="#EAE4C2"/>
+                    <Entry x:Name="EntranceEntry" FontSize="18" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+
+                    <Label Text="Домофон:" FontSize="18" TextColor="#EAE4C2"/>
+                    <Entry x:Name="IntercomEntry" FontSize="18" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+
+                    <Label Text="Комментарий:" FontSize="18" TextColor="#EAE4C2"/>
+                    <Editor x:Name="CommentEditor" FontSize="18" HeightRequest="100" TextColor="#EAE4C2" BackgroundColor="#334D34" />
+                </StackLayout>
+            </Frame>
+
+            <!-- Кнопка сохранения изменений -->
+            <Button Text="Сохранить изменения" 
+                    BackgroundColor="#719442" 
+                    TextColor="#EAE4C2"
+                    CornerRadius="10"
+                    Clicked="OnSaveButtonClicked" />
+        </StackLayout>
+
+    </ScrollView>
+
 </ContentPage>
