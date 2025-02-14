@@ -35,13 +35,16 @@
         <StackLayout Grid.Row="1" Spacing="10" VerticalOptions="Start">
             <BoxView HeightRequest="5" BackgroundColor="#719442"/>
 
+            <!-- Название продукта -->
             <Label x:Name="ProductName"
                    FontSize="36"
                    FontAttributes="Bold"
                    HorizontalOptions="Center"
                    TextColor="#EAE4C2" />
+            <!-- Отделитель между названием и изображением -->
             <BoxView HeightRequest="5" BackgroundColor="#719442"/>
 
+            <!-- Изображение продукта -->
             <Image x:Name="ProductImage"
                    HeightRequest="250"
                    WidthRequest="250"
@@ -70,7 +73,7 @@
                        LineBreakMode="WordWrap"
                        HorizontalTextAlignment="Center" />
 
-                <!-- Цена над кнопкой -->
+                <!-- Цена продукта -->
                 <Label x:Name="ProductPrice"
                        FontSize="24"
                        FontAttributes="Bold"
@@ -78,10 +81,11 @@
                        HorizontalOptions="End"
                        Margin="0,10,45,0"/>
 
-                <!-- Кнопка и счетчик -->
+                <!-- Контейнер с кнопками: + и - для изменения количества и кнопка "Добавить в корзину" -->
                 <Grid ColumnDefinitions="2*, 3*" Padding="10" ColumnSpacing="10">
                     <!-- Счетчик: + и - -->
                     <StackLayout Orientation="Horizontal" Grid.Column="0" HorizontalOptions="Start" Spacing="10">
+                        <!-- Кнопка уменьшения количества -->
                         <Button Text="-"
                                 FontSize="60"
                                 BackgroundColor="#EAE4C2"
@@ -91,11 +95,13 @@
                                 WidthRequest="40"
                                 HeightRequest="40"
                                 Clicked="OnDecreaseButtonClicked" />
+                        <!-- Метка для отображения текущего количества -->
                         <Label x:Name="QuantityLabel"
                                Text="1"
                                FontSize="20"
                                TextColor="#EAE4C2"
                                VerticalTextAlignment="Center" />
+                        <!-- Кнопка увеличения количества -->
                         <Button Text="+"
                                 FontSize="30"
                                 BackgroundColor="#EAE4C2"
@@ -105,7 +111,6 @@
                                 WidthRequest="40"
                                 HeightRequest="40"
                                 Clicked="OnIncreaseButtonClicked" />
-                        <!-- Обработчик для увеличения -->
                     </StackLayout>
 
                     <!-- Кнопка "Добавить в корзину" -->

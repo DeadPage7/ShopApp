@@ -7,6 +7,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
+            <!-- Разделение на две строки, одна для контента, другая для кнопки -->
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -15,11 +16,10 @@
         <ScrollView>
             <VerticalStackLayout Padding="10">
 
-                <!-- Заголовок страницы -->
+                <!-- Заголовок страницы с названием "Ваши адреса" -->
                 <Label Text="Ваши адреса:" FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" TextColor="#EAE4C2" />
-                <!-- Светлый цвет текста -->
 
-                <!-- Коллекция адресов -->
+                <!-- Коллекция для отображения списка адресов -->
                 <CollectionView x:Name="AddressesCollectionView"
                                 SelectionChanged="OnAddressTapped"
                                 SelectionMode="Single" Margin="0,10,0,0">
@@ -30,19 +30,26 @@
                                 <Frame Grid.Column="0" Padding="15" Margin="5" BorderColor="#719442" CornerRadius="15" BackgroundColor="#719442">
                                     <!-- Светлый фон для контейнера -->
                                     <VerticalStackLayout Spacing="10">
+                                        <!-- Информация о городе -->
                                         <Label Text="{Binding City}" FontSize="20" FontAttributes="Bold" TextColor="#EAE4C2"/>
-                                        <!-- Тёмный цвет текста -->
+                                        <!-- Улица -->
                                         <Label Text="{Binding Street}" FontSize="16" TextColor="#EAE4C2"/>
+                                        <!-- Дом -->
                                         <Label Text="{Binding House, StringFormat='Дом: {0}'}" FontSize="14" TextColor="#EAE4C2"/>
+                                        <!-- Этаж -->
                                         <Label Text="{Binding Floor, StringFormat='Этаж: {0}'}" FontSize="14" TextColor="#EAE4C2"/>
+                                        <!-- Квартира или офис -->
                                         <Label Text="{Binding ApartmentOrOffice, StringFormat='Квартира/офис: {0}'}" FontSize="14" TextColor="#EAE4C2"/>
+                                        <!-- Подъезд -->
                                         <Label Text="{Binding Entrance, StringFormat='Подъезд: {0}'}" FontSize="14" TextColor="#EAE4C2"/>
+                                        <!-- Домофон -->
                                         <Label Text="{Binding Intercom, StringFormat='Домофон: {0}'}" FontSize="14" TextColor="#EAE4C2"/>
+                                        <!-- Комментарий -->
                                         <Label Text="{Binding Comment, StringFormat='Комментарий: {0}'}" FontSize="14" TextColor="#EAE4C2"/>
                                     </VerticalStackLayout>
                                 </Frame>
 
-                                <!-- Кнопка удаления с ярким значком -->
+                                <!-- Кнопка удаления адреса -->
                                 <Button Grid.Column="1" Grid.Row="0" Text="❌"
                                         BackgroundColor="Transparent"
                                         TextColor="Red"
@@ -63,7 +70,7 @@
                 Text="Создать адрес"
                 FontAttributes="Bold"
                 BackgroundColor="#719442"
-            TextColor="White"
+                TextColor="White"
                 CornerRadius="30"
                 Padding="15"
                 HorizontalOptions="FillAndExpand"

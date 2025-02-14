@@ -2,62 +2,79 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ShopApp.Pages.DetailsOrderPage"
-             Title="Детали заказа">
-    <VerticalStackLayout Padding="10">
+             BackgroundColor="#334D34">
 
-        <!-- Заголовок -->
-        <Label Text="Детали заказа"
-               FontSize="24"
-               FontAttributes="Bold"
-               HorizontalOptions="Center" />
+    <!-- Обернули весь контент в ScrollView -->
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="15">
 
-        <!-- Информация о заказе -->
-        <Label Text="Номер заказа:" FontAttributes="Bold" />
-        <Label x:Name="OrderIdLabel" FontSize="16" />
+            <!-- Заголовок -->
+            <Label Text="Детали заказа"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#EAE4C2" />
 
-        <Label Text="Дата заказа:" FontAttributes="Bold" />
-        <Label x:Name="OrderDateLabel" FontSize="16" />
+            <!-- Информация о заказе -->
+            <Label Text="Номер заказа:" FontAttributes="Bold" TextColor="#EAE4C2"/>
+            <Label x:Name="OrderIdLabel" FontSize="16" TextColor="#EAE4C2"/>
 
-        <Label Text="Общая сумма:" FontAttributes="Bold" />
-        <Label x:Name="TotalCostLabel" FontSize="16" TextColor="Green" />
+            <Label Text="Дата заказа:" FontAttributes="Bold" TextColor="#EAE4C2"/>
+            <Label x:Name="OrderDateLabel" FontSize="16" TextColor="#EAE4C2"/>
 
-        <!-- Заголовок списка товаров -->
-        <Label Text="Товары в заказе" FontSize="20" FontAttributes="Bold"
-               Margin="0,10,0,5" />
+            <Label Text="Общая сумма:" FontAttributes="Bold" TextColor="#EAE4C2"/>
+            <Label x:Name="TotalCostLabel" FontSize="16" TextColor="#EAE4C2"/>
 
-        <!-- Список товаров -->
-        <CollectionView x:Name="ItemsListView">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BorderColor="Gray" Padding="10" Margin="5">
-                        <HorizontalStackLayout Spacing="15">
-                            <Image Source="{Binding Product.Photo}" 
-           HeightRequest="100" 
-           WidthRequest="100"
-           Aspect="AspectFit"
-           BackgroundColor="White"
-           VerticalOptions="Center"/>
+            <!-- Заголовок списка товаров -->
+            <Label Text="Товары в заказе" 
+                   FontSize="20" 
+                   FontAttributes="Bold" 
+                   Margin="0,10,0,5" 
+                   TextColor="#EAE4C2"/>
 
-                            <VerticalStackLayout>
-                                <Label Text="{Binding Product.Name}" 
-               FontSize="18" 
-               FontAttributes="Bold"
-               TextColor="Black"/>
+            <!-- Список товаров -->
+            <CollectionView x:Name="ItemsListView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="#719442" Padding="10" Margin="0,10" BackgroundColor="#334D34">
+                            <HorizontalStackLayout Spacing="15">
+                                <!-- Изображение товара с фоном и бордером -->
+                                <Frame BackgroundColor="#334D34" BorderColor="#719442" Padding="5" CornerRadius="10">
+                                    <Image Source="{Binding Product.Photo}" 
+                                           HeightRequest="100" 
+                                           WidthRequest="100"
+                                           Aspect="AspectFit"
+                                           VerticalOptions="Center"/>
+                                </Frame>
 
-                                <Label Text="{Binding Product.Price, StringFormat='💰 Цена: {0:C}'}" 
-               FontSize="16" 
-               TextColor="DarkGreen"/>
+                                <VerticalStackLayout>
+                                    <!-- Название товара -->
+                                    <Label Text="{Binding Product.Name}" 
+                                           FontSize="18" 
+                                           FontAttributes="Bold"
+                                           TextColor="#EAE4C2"/>
 
-                                <Label Text="{Binding Quantity, StringFormat='📦 Количество: {0}'}" 
-               FontSize="16" 
-               TextColor="DarkBlue"/>
-                                <Label Text="{Binding TotalCost, StringFormat='Сумма: {0:C}'}" FontSize="14" TextColor="Green"/>
-                            </VerticalStackLayout>
-                        </HorizontalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                                    <!-- Цена товара -->
+                                    <Label Text="{Binding Product.Price, StringFormat='💰 Цена: {0:C}'}" 
+                                           FontSize="16" 
+                                           TextColor="#EAE4C2"/>
 
-    </VerticalStackLayout>
+                                    <!-- Количество товара -->
+                                    <Label Text="{Binding Quantity, StringFormat='📦 Количество: {0}'}" 
+                                           FontSize="16" 
+                                           TextColor="#EAE4C2"/>
+
+                                    <!-- Сумма товара -->
+                                    <Label Text="{Binding TotalCost, StringFormat='Сумма: {0:C}'}" 
+                                           FontSize="14" 
+                                           TextColor="#EAE4C2"/>
+                                </VerticalStackLayout>
+                            </HorizontalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

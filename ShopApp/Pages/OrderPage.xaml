@@ -2,45 +2,81 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ShopApp.Pages.OrderPage"
+             BackgroundColor="#334D34" 
              Title="Мои заказы">
-    <VerticalStackLayout Padding="10">
 
-        <!-- Заголовок -->
-        <Label Text="Мои заказы"
-               FontSize="24"
-               FontAttributes="Bold"
-               HorizontalOptions="Center" />
+    <!-- Обернули весь контент в ScrollView, чтобы страница могла прокручиваться -->
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="15">
 
-        <!-- Список заказов -->
-        <CollectionView x:Name="OrdersListView">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Frame BorderColor="Gray" Padding="10" Margin="5">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Id, StringFormat='Заказ №{0}'}" FontSize="18" FontAttributes="Bold" />
-                            <Label Text="{Binding OrderDate, StringFormat='Дата оформления: {0:dd.MM.yyyy}'}" FontSize="14" />
-                            <Label Text="{Binding TotalCost, StringFormat='Итого: {0:C}'}" FontSize="16"
-                   FontAttributes="Bold" TextColor="Green"/>
-                            <Label Text="{Binding Status.Name, StringFormat='Статус: {0}'}" />
+            <!-- Заголовок страницы -->
+            <Label Text="Мои заказы"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#EAE4C2"  
+                   Margin="0,10"/>
 
-                            <!-- Кнопка удаления -->
-                            <Button Text="Удалить" TextColor="White" BackgroundColor="Red"
-                    Clicked="DeleteOrder_Clicked"
-                    CommandParameter="{Binding Id}" />
-                            <Button Text="Просмотр" Clicked="ViewOrder_Clicked" CommandParameter="{Binding Id}" />
-                        </VerticalStackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            <!-- Список заказов, использует CollectionView для отображения -->
+            <CollectionView x:Name="OrdersListView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <!-- Каждый заказ отображается в Frame с границей -->
+                        <Frame BorderColor="#719442" Padding="10" Margin="0,10,0,10" BackgroundColor="#334D34">
+                            <VerticalStackLayout Spacing="15">
+                                <!-- Заголовок заказа, отображает номер заказа -->
+                                <Label Text="{Binding Id, StringFormat='Заказ №{0}'}" 
+                                       FontSize="18" 
+                                       FontAttributes="Bold" 
+                                       TextColor="#EAE4C2" />
 
-        <!-- Сообщение, если нет заказов -->
-        <Label x:Name="NoOrdersLabel" 
-               Text="У вас пока нет заказов." 
-               IsVisible="False" 
-               HorizontalOptions="Center"
-               FontSize="16"
-               TextColor="Gray"/>
+                                <!-- Дата оформления заказа, отображается в формате день.месяц.год -->
+                                <Label Text="{Binding OrderDate, StringFormat='Дата оформления: {0:dd.MM.yyyy}'}" 
+                                       FontSize="14" 
+                                       TextColor="#EAE4C2" />
 
-    </VerticalStackLayout>
+                                <!-- Общая стоимость заказа, с форматом валюты -->
+                                <Label Text="{Binding TotalCost, StringFormat='Итого: {0:C}'}" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       TextColor="#719442" />
+
+                                <!-- Статус заказа -->
+                                <Label Text="{Binding Status.Name, StringFormat='Статус: {0}'}" 
+                                       FontSize="14" 
+                                       TextColor="#EAE4C2" />
+
+                                <!-- Кнопки для удаления и просмотра заказа -->
+                                <HorizontalStackLayout Spacing="10" HorizontalOptions="FillAndExpand">
+                                    <!-- Кнопка для удаления заказа -->
+                                    <Button Text="Удалить" 
+                                            TextColor="White" 
+                                            BackgroundColor="Red"
+                                            Clicked="DeleteOrder_Clicked" 
+                                            CommandParameter="{Binding Id}" />
+
+                                    <!-- Кнопка для просмотра заказа -->
+                                    <Button Text="Просмотр" 
+                                            BackgroundColor="#719442" 
+                                            TextColor="#EAE4C2" 
+                                            Clicked="ViewOrder_Clicked" 
+                                            CommandParameter="{Binding Id}" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Сообщение, если у пользователя нет заказов -->
+            <Label x:Name="NoOrdersLabel" 
+                   Text="У вас пока нет заказов." 
+                   IsVisible="False" 
+                   HorizontalOptions="Center"
+                   FontSize="16"
+                   TextColor="#EAE4C2" 
+                   Margin="20,10"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

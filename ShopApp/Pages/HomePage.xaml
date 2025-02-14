@@ -45,7 +45,6 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Padding="5">
-                            <!-- Убираем рамку и тень -->
                             <Frame Padding="5" CornerRadius="5" Margin="3" BackgroundColor="#719442">
                                 <Label Text="{Binding Name}" 
                            FontSize="18" 
